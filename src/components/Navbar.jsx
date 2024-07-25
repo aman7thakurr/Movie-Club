@@ -54,6 +54,15 @@ function NavBar() {
             >
               Tv Shows
             </NavLink>
+            <NavLink
+              exact
+              to="/TvShows"
+              activeclassname={styles.active}
+              className={styles["nav-links"]}
+              onClick={handleClick}
+            >
+              Web Series
+            </NavLink>
           </li>
          
           <div   className={`ml-auto flex items-center gap-5 right-10 ${styles.custom}`}>

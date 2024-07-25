@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Movies from './pages/Movies.jsx'
 import { TvShows } from './pages/TvShows.jsx'
 import SearchResult from './pages/SearchResult.jsx'
+import { WebSeries } from './pages/WebSeries.jsx'
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path : '/SearchResult',
     element : <SearchResult/>
+  },
+  {
+    path : '/Webseries',
+    element : <WebSeries/>
   }
 ])
 
