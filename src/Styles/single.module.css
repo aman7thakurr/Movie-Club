@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     margin-top: 50px;
 }
 .container{
@@ -19,9 +20,11 @@
     height: 490px;
     max-width: 350px;
     margin-right: 20px;
+    cursor: pointer;
 }
 .details{
     height: 525px;
+
 }
 .title{
     width: 100%;
@@ -36,6 +39,7 @@
 .genre{
  margin-top: 10px;
  margin-bottom: 10px;
+cursor: pointer;
 }
 .genre span{
     color: white;
@@ -50,7 +54,7 @@
     margin-bottom: 10px;
     display: flex;
 align-items: center;
-
+cursor: pointer;
 }
 .rating span{
     width: 110px;
@@ -70,6 +74,7 @@ align-items: center;
 .info{
     margin-top: 10px;
     margin-bottom: 10px;
+
 }
 
 .info span{

@@ -35,7 +35,7 @@ const CarouselElement = ({title}) => {
   return (
   <>
     <div className="container" style={{marginBottom : '15px',marginTop:'10px'}}>
-      <p style={{marginBottom : '10px', fontWeight:'bolder',fontSize:'24px'}}>{title} on Movie Club</p> <div className="card">
+      <p style={{marginBottom : '10px', fontWeight:'bolder',fontSize:'34px'}}>{title}</p> <div className="card">
       <Carousel responsive={responsive}>
    
           <Link to='/Single'>

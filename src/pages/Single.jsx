@@ -4,7 +4,9 @@ import styles from '../Styles/single.module.css'
 import NavBar from '../components/Navbar'
 import Footer from '../components/Footer'
 import CircleRating from '../components/CircleRating'
-import { MdHeight } from 'react-icons/md';
+import CarouselElement from '../components/CarouselElement'
+import Cast from '../components/Cast';
+
 const Single = () => {
   return (
     <>
@@ -24,6 +26,9 @@ const Single = () => {
             <div className={styles.info}><span>Writer :</span> </div><hr />
         </div> 
     </div>
+    <Cast/>
+    <CarouselElement title={'Recommendation'}/>
+    <CarouselElement title={'Similar'}/>
     </div>
     <Footer/>
   </>
