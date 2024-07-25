@@ -4,7 +4,7 @@ import { CodeIcon } from './Icons';
 export default function App() {
   return (
     <MDBFooter  className='text-center text-lg-left'>
-      <div className='text-center p-3' style={{ backgroundColor: '#020c1b' ,padding:'10px' ,textAlign:'center' ,position: "fixed"
+      <div className='text-center p-3' style={{ backgroundColor: '#020c1b' ,padding:'10px' ,textAlign:'center' 
   ,left: "0",
   bottom: "0"
   ,width: '100%'

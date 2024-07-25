@@ -17,7 +17,7 @@
   font-size: 1.2rem;
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 1001;
 }
 
 .navbar:hover {
@@ -119,7 +119,7 @@
     left: -110%;
     opacity: 1;
     transition: all 0.5s ease;
-    z-index: 999;
+    z-index: 1001;
   }
 .custom{
 

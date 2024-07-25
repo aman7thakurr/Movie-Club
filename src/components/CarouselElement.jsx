@@ -38,7 +38,7 @@ const CarouselElement = ({title}) => {
       <Carousel responsive={responsive}>
    
           
-          <div className="swiper-slide">
+          <div className="swiper-slide" style={{marginRight:"10px"}}>
             <img
               src="https://image.tmdb.org/t/p/w500/ba7hnMx1HAze0QSJSNfsTBycS8U.jpg"
               alt=""
