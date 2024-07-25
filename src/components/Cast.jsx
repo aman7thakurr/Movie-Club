@@ -3,7 +3,8 @@ import styles from '../Styles/cast.module.css'
 const Cast = () => {
   return (
     <>
-     <h1 style={{fontSize:'35px'}}>Cast</h1>
+     <h1 style={{fontSize:'35px'   ,marginTop: "20px",
+     fontWeight: "600"}}>Cast</h1>
      <div className={styles.parent}>
     <div>
        

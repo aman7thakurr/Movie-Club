@@ -3,9 +3,12 @@
         display: flex;
         /* flex-direction: column; */
         padding: 10px;
-        justify-content: space-around;
+        justify-content: center;
+        gap: 40px;
+        text-align: center;
     width: 100%;
      margin-bottom: 30px;
+  
     }
      .image{
         height: 150px;
