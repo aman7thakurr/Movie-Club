@@ -69,6 +69,12 @@
   height: 100%;
   border-bottom: 3px solid transparent;
 }
+/* .nav-links-Login{
+  display: none;
+  visibility: hidden;
+  display: none;
+  opacity: 0;
+} */
 /* .fa-code {
   margin-left: 1rem;
 } */
@@ -107,7 +113,11 @@
   width: 2rem;
   height: 2rem;
 }
-
+.hideOnLarge {
+  @media (min-width: 961px) {
+    display: none;
+  }
+}
 @media screen and (max-width: 960px) {
   .nav-menu {
     display: flex;

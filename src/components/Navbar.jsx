@@ -68,6 +68,17 @@ function NavBar() {
             </NavLink>
 
          </li>
+         <li className={`${styles.navItem} ${styles.hideOnLarge}`}>
+            <NavLink
+              exact
+              to="/Login"
+              activeClassName={styles.active}
+              className={styles.navLinksLogin}
+              onClick={handleClick}
+            >
+              Login
+            </NavLink>
+          </li>
           <div   className={`ml-auto flex items-center gap-5 right-10 ${styles.custom}`}>
                     <form  className='flex items-center gap-2' onSubmit={handleSubmit}>
                         <input 
@@ -81,12 +92,12 @@ function NavBar() {
                                 <IoSearchOutline/>
                         </button>
                     </form>
-                    <div className='w-8 h-8 rounded-full overflow-hidden cursor-pointer active:scale-50 transition-all'>
+                  <NavLink to='/Login'>  <div className='w-8 h-8 rounded-full overflow-hidden cursor-pointer active:scale-50 transition-all'>
                         <img
                             src={userIcon}
                             width='w-ful h-full' 
                         />
-                    </div>
+                    </div></NavLink>
                 </div>
                 
         </ul>

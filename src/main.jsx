@@ -8,6 +8,7 @@ import { TvShows } from './pages/TvShows.jsx'
 import SearchResult from './pages/SearchResult.jsx'
 import { WebSeries } from './pages/WebSeries.jsx'
 import Single from './pages/Single.jsx'
+import Login from './pages/Login.jsx'
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
   {
     path : '/Single',
     element : <Single/>
+  }
+  ,{
+    path : '/Login',
+    element : <Login/>
   }
 ])
 
