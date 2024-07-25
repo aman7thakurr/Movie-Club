@@ -54,17 +54,20 @@ function NavBar() {
             >
               Tv Shows
             </NavLink>
-            <NavLink
+           
+          </li>
+          <li className={styles["nav-item"]}>
+           <NavLink
               exact
-              to="/TvShows"
+              to="/Webseries"
               activeclassname={styles.active}
               className={styles["nav-links"]}
               onClick={handleClick}
             >
               Web Series
             </NavLink>
-          </li>
-         
+
+         </li>
           <div   className={`ml-auto flex items-center gap-5 right-10 ${styles.custom}`}>
                     <form  className='flex items-center gap-2' onSubmit={handleSubmit}>
                         <input 
