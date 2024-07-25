@@ -7,6 +7,7 @@ import Movies from './pages/Movies.jsx'
 import { TvShows } from './pages/TvShows.jsx'
 import SearchResult from './pages/SearchResult.jsx'
 import { WebSeries } from './pages/WebSeries.jsx'
+import Single from './pages/Single.jsx'
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path : '/Webseries',
     element : <WebSeries/>
+  },
+  {
+    path : '/Single',
+    element : <Single/>
   }
 ])
 

@@ -5,6 +5,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import CircleRating from './CircleRating';
+import { Link } from 'react-router-dom';
 const CarouselElement = ({title}) => {
  
 
@@ -37,7 +38,7 @@ const CarouselElement = ({title}) => {
       <p style={{marginBottom : '10px', fontWeight:'bolder',fontSize:'24px'}}>{title} on Movie Club</p> <div className="card">
       <Carousel responsive={responsive}>
    
-          
+          <Link to='/Single'>
           <div className="swiper-slide" style={{marginRight:"10px"}}>
             <img
               src="https://image.tmdb.org/t/p/w500/ba7hnMx1HAze0QSJSNfsTBycS8U.jpg"
@@ -46,8 +47,10 @@ const CarouselElement = ({title}) => {
             <p>Movie Title</p>
             <p>Release Date</p>
           </div>
-        
-        <div className="swiper-slide">
+          </Link>
+
+        <Link  to='/Single'>
+        <div className="swiper-slide" style={{marginRight:"10px"}}>
             <img
               src="https://image.tmdb.org/t/p/w500/c3XBgBLzB9Sh7k7ewXY2QpfH47L.jpg"
               alt=""
@@ -55,8 +58,10 @@ const CarouselElement = ({title}) => {
              <p>Movie Title</p>
              <p>Release Date</p>
           </div>
-           
-          <div className="swiper-slide">
+          </Link>
+
+           <Link   to='/Single'>
+          <div className="swiper-slide" style={{marginRight:"10px"}}>
             <img
               src="https://image.tmdb.org/t/p/w500/b5rOkbQ0jKYvBqBf3bwJ6nXBOtx.jpg"
               alt=""
@@ -64,8 +69,10 @@ const CarouselElement = ({title}) => {
              <p>Movie Title</p>
              <p>Release Date</p>
           </div>
-         
-          <div className="swiper-slide">
+          </Link>
+
+         <Link    to='/Single'>
+          <div className="swiper-slide" style={{marginRight:"10px"}}>
             <img
               src="https://image.tmdb.org/t/p/w500/aNsrgElf0fiKBSR8cWWEL6XUTte.jpg"
               alt=""
@@ -73,8 +80,10 @@ const CarouselElement = ({title}) => {
              <p>Movie Title</p>
              <p>Release Date</p>
           </div>
-          
-          <div className="swiper-slide">
+          </Link>
+
+          <Link     to='/Single'>
+          <div className="swiper-slide" style={{marginRight:"10px"}}>
             <img
               src="https://image.tmdb.org/t/p/w500/dueiWzWc81UAgnbDAyH4Gjqnh4n.jpg"
               alt=""
@@ -82,8 +91,10 @@ const CarouselElement = ({title}) => {
              <p>Movie Title</p>
              <p>Release Date</p>
           </div>
+          </Link>
           
-          <div className="swiper-slide">
+          <Link      to='/Single'>
+          <div className="swiper-slide" style={{marginRight:"10px"}}>
             <img
               src="https://image.tmdb.org/t/p/w500/hwNRc9ZWrakGdql22srY7DqtmRQ.jpg"
               alt=""
@@ -91,8 +102,10 @@ const CarouselElement = ({title}) => {
              <p>Movie Title</p>
              <p>Release Date</p>
           </div>
-          
-          <div className="swiper-slide">
+          </Link>
+
+          <Link       to='/Single'>
+          <div className="swiper-slide" style={{marginRight:"10px"}}>
             <img
               src="https://image.tmdb.org/t/p/w500/trAOGwksvgHYNpbK4GewbjYQ1pi.jpg"
               alt=""
@@ -100,8 +113,10 @@ const CarouselElement = ({title}) => {
              <p>Movie Title</p>
              <p>Release Date</p>
           </div>
-          
-          <div className="swiper-slide">
+          </Link>
+
+          <Link        to='/Single'>
+          <div className="swiper-slide" style={{marginRight:"10px"}}>
             <img
               src="https://image.tmdb.org/t/p/w500/zAIippNnm6o0gYEtjapbjQSxP8G.jpg"
               alt=""
@@ -109,8 +124,10 @@ const CarouselElement = ({title}) => {
              <p>Movie Title</p>
              <p>Release Date</p>
           </div>
-          
-          <div className="swiper-slide">
+          </Link>
+
+          <Link         to='/Single'>
+          <div className="swiper-slide" style={{marginRight:"10px"}}>
             <img
               src="https://image.tmdb.org/t/p/w500/tNyJxHK3m7NAAKNYITLJ5oxS0YR.jpg"
               alt=""
@@ -118,8 +135,10 @@ const CarouselElement = ({title}) => {
              <p>Movie Title</p>
              <p>Release Date</p>
           </div>
-         
-          <div className="swiper-slide">
+          </Link>
+
+         <Link          to='/Single'>
+          <div className="swiper-slide" style={{marginRight:"10px"}}>
             <img
               src="https://image.tmdb.org/t/p/w500/hMh1mR2kNl8kHjpIuPh4TICTwjo.jpg"
               alt=""
@@ -127,8 +146,10 @@ const CarouselElement = ({title}) => {
              <p>Movie Title</p>
              <p>Release Date</p>
           </div>
+          </Link>
           
-          <div className="swiper-slide">
+          <Link           to='/Single'>
+          <div className="swiper-slide" style={{marginRight:"10px"}}>
             <img
               src="https://image.tmdb.org/t/p/w500/c4EkF5JAZ83bUqNErhuSd9xw6uJ.jpg"
               alt=""
@@ -137,7 +158,7 @@ const CarouselElement = ({title}) => {
              <p>Movie Title</p>
              <p>Release Date</p>
           </div>
-          
+          </Link>
       </Carousel>
     </div>
   </div>
