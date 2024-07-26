@@ -1,4 +1,4 @@
-import {useState,useEffect} from "react";
+import { useState, useEffect } from "react";
 import { FcStart } from "react-icons/fc";
 import styles from "../Styles/single.module.css";
 import NavBar from "../components/Navbar";
@@ -7,57 +7,81 @@ import CircleRating from "../components/CircleRating";
 import CarouselElement from "../components/CarouselElement";
 import Cast from "../components/Cast";
 import { useLocation } from "react-router-dom";
-import { replaceIDs } from "@iconify/react/dist/iconify.js";
+
+const API_KEY = 'ef6d335af07081934aa88a703974311c'; 
 
 const Single = () => {
   const location = useLocation();
-  const { movie } = location.state || {}; // Safe access to movie
+  const { movie } = location.state || {}; 
 
-const  [similarData, setSimilarData] = useState([])
-const  [recommendationData, setRecommendationData] = useState([])
-const [loading, setLoading] = useState(true);
+  const [similarData, setSimilarData] = useState([]);
+  const [recommendationData, setRecommendationData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [genreList, setGenreList] = useState([]); 
+  const [movieGenres, setMovieGenres] = useState([]); 
 
-useEffect(()=>{
-  const fetchData = async () => {
-    try{
-      const urls =[
-        `https://api.themoviedb.org/3/movie/${movie.id}/similar?api_key=ef6d335af07081934aa88a703974311c`,
-        `https://api.themoviedb.org/3/movie/${movie.id}/recommendations?api_key=ef6d335af07081934aa88a703974311c`
-      ];
-      const [similarResponse,recommendationResponse] = await Promise.all(
-        urls.map(url => fetch(url))
-      )
-      if(!similarResponse.ok || !recommendationResponse.ok){
-        throw new Error("Network Response Was not OK");
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const urls = [
+          `https://api.themoviedb.org/3/movie/${movie.id}/similar?api_key=${API_KEY}`,
+          `https://api.themoviedb.org/3/movie/${movie.id}/recommendations?api_key=${API_KEY}`,
+          `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}` // Fetch genre list
+        ];
+
+        const [similarResponse, recommendationResponse, genreResponse] = await Promise.all(
+          urls.map(url => fetch(url))
+        );
+
+        if (!similarResponse.ok || !recommendationResponse.ok || !genreResponse.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const [similarData, recommendationData, genreData] = await Promise.all([
+          similarResponse.json(),
+          recommendationResponse.json(),
+          genreResponse.json() 
+        ]);
+
+        setSimilarData(similarData.results);
+        setRecommendationData(recommendationData.results);
+        setGenreList(genreData.genres); 
+        
+        const genreMap = genreData.genres.reduce((acc, genre) => {
+          acc[genre.id] = genre.name;
+          return acc;
+        }, {});
+
+        const genres = movie.genre_ids
+          ? movie.genre_ids
+              .map(id => genreMap[id]) 
+              .filter(name => name) 
+          : [];
+
+        setMovieGenres(genres);
+
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
       }
+    };
 
-      const [similarData,recommendationData] = await Promise.all([
-        similarResponse.json(),
-        recommendationResponse.json()
-      ])
+    fetchData();
+  }, [movie.id]);
 
-      setSimilarData(similarData.results);
-      setRecommendationData(recommendationData.results)
-      setLoading(false);
-    } catch (error) {
-      setError(error);
-      setLoading(false);
-    }
+  if (loading) {
+    return <div>Loading...</div>;
   }
-  fetchData();
-},[])
 
-if (loading) {
-  return <div>Loading...</div>;
-}
+  if (error) {
+    return <div>Error fetching data: {error.message}</div>;
+  }
 
-if (error) {
-  return <div>Error fetching data: {error.message}</div>;
-}
-  if (!movie) return <div>Movie Data not Available</div>;
+  if (!movie) return <div>Movie data not available</div>;
 
-  // Handle missing or undefined movie poster
+  
   const posterSrc = movie.poster_path
     ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
     : "https://via.placeholder.com/300x450?text=No+Image";
@@ -73,7 +97,7 @@ if (error) {
             width: "100%",
             height: "100%",
             position: "absolute",
-            top:'0',
+            top: '0',
             left: "0",
             opacity: "0.5",
             filter: "blur(4px)",
@@ -81,11 +105,9 @@ if (error) {
         ></div>
 
         <div className={styles.container}>
-          
-          <div  className={styles.image}>
+          <div className={styles.image}>
             <img
-            style={{height:'100%',width:'100%'}}
-              // style={{ height: "560px" }}
+              style={{ height: '100%', width: '100%' }}
               src={posterSrc}
               alt={movie.title}
             />
@@ -99,9 +121,15 @@ if (error) {
               <h3>{movie.original_title || "Movie Sub Title"}</h3>
             </div>
             <div className={styles.genre}>
-              <span>
-                {movie.genres?.map((genre) => genre.name).join(", ") || "Genre"}
-              </span>
+              {movieGenres.length > 0 ? (
+                movieGenres.map((genre, index) => (
+                  <span key={index} className={styles.genreItem}>
+                    {genre}
+                  </span>
+                ))
+              ) : (
+                <span>No genres available</span>
+              )}
             </div>
             <div className={styles.rating}>
               <span>
@@ -136,15 +164,13 @@ if (error) {
             <hr />
           </div>
         </div>
-       
       </div>
 
-      <div className="container" style={{  margin: "0 auto",
-        padding: "0 15px"}}>
-  <Cast movieId={movie.id} />
-      <CarouselElement title={"Recommendation"} popularData={recommendationData} />
-      <CarouselElement title={"Similar"} popularData={similarData}/>
-     </div>
+      <div className="container" style={{ margin: "0 auto", padding: "0 15px" }}>
+        <Cast movieId={movie.id} />
+        <CarouselElement title={"Recommendation"} popularData={recommendationData} />
+        <CarouselElement title={"Similar"} popularData={similarData} />
+      </div>
 
       <Footer />
     </>
