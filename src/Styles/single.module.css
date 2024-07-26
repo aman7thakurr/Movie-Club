@@ -1,84 +1,444 @@
-.parent{
+.parent {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     margin-top: 50px;
-}
-.container{
-    display: flex;
-    /* justify-content: space-between; */
-    
-    height: 541px;
-    width: 35%;
     position: relative;
+    padding: 10px;
 }
-.image{
-    border: solid 1px white;
-    width: 108%;
+
+.bgBlur {
+    width: 100%;
     height: 100%;
-    height: 490px;
-    max-width: 350px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
+    filter: blur(4px);
+    background-image: url(https://image.tmdb.org/t/p/original/fqv8v6AycXKsivp1T5yKtLbGXce.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.bgBlur:after {
+    content: '';
+    width: 100%;
+    height: 250px;
+    background: linear-gradient(180deg, #04152d00, #04152d 79.17%);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    opacity: 0.5;
+}
+
+.container {
+    display: flex;
+    max-width: 55%;
+    position: relative;
+    flex-wrap: wrap; /* Allows wrapping of content for better responsiveness */
+}
+
+.image {
     margin-right: 20px;
     cursor: pointer;
+    max-width: 30%;
 }
-.details{
-    height: 525px;
 
+.details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
-.title{
-    width: 100%;
+
+.title {
     font-weight: 750;
     font-size: 39px;
 }
-.subTitle{
+
+.subTitle {
     font-size: 20px;
     font-weight: 100;
     color: lightgray;
 }
-.genre{
- margin-top: 10px;
- margin-bottom: 10px;
-cursor: pointer;
+
+.genre {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
-.genre span{
+
+.genre span {
     color: white;
     background-color: rgb(236, 57, 57);
     padding: 3px;
     width: 200px;
     border-radius: 5px;
-
 }
-.rating{
+
+.rating {
     margin-top: 10px;
     margin-bottom: 10px;
     display: flex;
-align-items: center;
-cursor: pointer;
+    align-items: center;
+    cursor: pointer;
 }
-.rating span{
+
+.rating span {
     width: 110px;
     text-align: center;
     margin-right: 10px;
 }
 
-.heading{
+.heading {
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 10px;
 }
-.description{
+
+.description {
     margin-bottom: 10px;
     font-size: 18px;
 }
-.info{
+
+.info {
     margin-top: 10px;
     margin-bottom: 10px;
-
 }
 
-.info span{
+.info span {
     margin-top: 10px;
     font-size: 20px;
     margin-right: 10px;
+}
+
+/* Media Queries */
+/* For 1024×768 (Tablets in portrait mode) */
+@media (max-width: 1024px) {
+    .container {
+        max-width: 90%;
+    }
+    .image {
+        height: 140px;
+        width: 140px;
+    }
+    .title {
+        font-size: 1.4rem;
+    }
+    .subTitle {
+        font-size: 1rem;
+    }
+    .genre span {
+        width: 150px;
+    }
+    .rating span {
+        width: 85px;
+    }
+    .heading {
+        font-size: 1rem;
+    }
+    .description {
+        font-size: 0.8rem;
+    }
+    .info span {
+        font-size: 0.8rem;
+    }
+}
+
+/* For 768×480 (Small Tablets and Large Phones) */
+@media (max-width: 768px) {
+    .container {
+        max-width: 95%;
+    }
+    .image {
+        height: 120px;
+        width: 120px;
+    }
+    .title {
+        font-size: 1.2rem;
+    }
+    .subTitle {
+        font-size: 0.9rem;
+    }
+    .genre span {
+        width: 140px;
+    }
+    .rating span {
+        width: 75px;
+    }
+    .heading {
+        font-size: 0.9rem;
+    }
+    .description {
+        font-size: 0.7rem;
+    }
+    .info span {
+        font-size: 0.7rem;
+    }
+}
+
+/* For 480×320 (Large Mobile Screens) */
+@media (max-width: 480px) {
+    .container {
+        max-width: 100%;
+    }
+    .image {
+        height: 100px;
+        width: 100px;
+    }
+    .title {
+        font-size: 1rem;
+    }
+    .subTitle {
+        font-size: 0.8rem;
+    }
+    .genre span {
+        width: 120px;
+    }
+    .rating span {
+        width: 60px;
+    }
+    .heading {
+        font-size: 0.8rem;
+    }
+    .description {
+        font-size: 0.6rem;
+    }
+    .info span {
+        font-size: 0.6rem;
+    }
+}
+
+/* For 360×640 (Small Mobile Screens) */
+@media (max-width: 360px) {
+    .container {
+        max-width: 100%;
+        padding: 5px;
+    }
+    .image {
+        height: 100%;
+        width: 100%;
+    }
+    .title {
+        font-size: 0.9rem;
+    }
+    .subTitle {
+        font-size: 0.7rem;
+    }
+    .genre span {
+        width: 100px;
+    }
+    .rating span {
+        width: 50px;
+    }
+    .heading {
+        font-size: 0.7rem;
+    }
+    .description {
+        font-size: 0.5rem;
+    }
+    .info span {
+        font-size: 0.5rem;
+    }
+}
+
+/* For 1920×1080 */
+@media (min-width: 1920px) {
+    .container {
+        max-width: 70%;
+        align-items: center;
+        justify-content: center;
+    }
+    .image {
+        height: 300px;
+        width: 300px;
+    }
+    .title {
+        font-size: 2rem;
+    }
+    .subTitle {
+        font-size: 1.5rem;
+    }
+    .genre span {
+        width: 220px;
+    }
+    .rating span {
+        width: 120px;
+    }
+    .heading {
+        font-size: 1.5rem;
+    }
+    .description {
+        font-size: 1.2rem;
+    }
+    .info span {
+        font-size: 1.2rem;
+    }
+}
+
+/* For 1600×900 */
+@media (max-width: 1600px) {
+    .container {
+        max-width: 62%;
+        align-items: center;
+        justify-content: center;
+    }
+    .image {
+        height: 210px;
+        width: 210px;
+    }
+    .title {
+        font-size: 1.8rem;
+    }
+    .subTitle {
+        font-size: 1.4rem;
+    }
+    .genre span {
+        width: 195px;
+    }
+    .rating span {
+        width: 110px;
+    }
+    .heading {
+        font-size: 1.4rem;
+    }
+    .description {
+        font-size: 1.1rem;
+    }
+    .info span {
+        font-size: 1.1rem;
+    }
+}
+
+/* For 1440×900 */
+@media (max-width: 1440px) {
+    .container {
+        max-width: 60%;
+    }
+    .image {
+        height: 230px;
+        width: 230px;
+    }
+    .title {
+        font-size: 1.7rem;
+    }
+    .subTitle {
+        font-size: 1.3rem;
+    }
+    .genre span {
+        width: 185px;
+    }
+    .rating span {
+        width: 105px;
+    }
+    .heading {
+        font-size: 1.3rem;
+    }
+    .description {
+        font-size: 1rem;
+    }
+    .info span {
+        font-size: 1rem;
+    }
+}
+
+/* For 1366×768 */
+@media (max-width: 1366px) {
+    .container {
+        max-width: 70%;
+    }
+    .image {
+        height: 190px;
+        width: 190px;
+    }
+    .title {
+        font-size: 1.6rem;
+    }
+    .subTitle {
+        font-size: 1.2rem;
+    }
+    .genre span {
+        width: 180px;
+    }
+    .rating span {
+        width: 100px;
+    }
+    .heading {
+        font-size: 1.2rem;
+    }
+    .description {
+        font-size: 0.9rem;
+    }
+    .info span {
+        font-size: 0.9rem;
+    }
+}
+
+/* For 1536×864 */
+@media (max-width: 1536px) {
+    .container {
+        max-width: 65%;
+        align-items: center;
+        justify-content: center;
+    }
+    .image {
+        height: 195px;
+        width: 195px;
+    }
+    .title {
+        font-size: 1.7rem;
+    }
+    .subTitle {
+        font-size: 1.3rem;
+    }
+    .genre span {
+        width: 190px;
+    }
+    .rating span {
+        width: 105px;
+    }
+    .heading {
+        font-size: 1.3rem;
+    }
+    .description {
+        font-size: 1rem;
+    }
+    .info span {
+        font-size: 1rem;
+    }
+}
+
+/* For 1280×720 */
+@media (max-width: 1280px) {
+    .container {
+        max-width: 80%;
+        align-items: center;
+    justify-content: center;
+    }
+    .image {
+        height: 190px;
+        width: 190px;
+    }
+    .title {
+        font-size: 1.5rem;
+    }
+    .subTitle {
+        font-size: 1.1rem;
+    }
+    .genre span {
+        width: 170px;
+    }
+    .rating span {
+        width: 95px;
+    }
+    .heading {
+        font-size: 1.1rem;
+    }
+    .description {
+        font-size: 0.9rem;
+    }
+    .info span {
+        font-size: 0.9rem;
+    }
 }

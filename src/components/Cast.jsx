@@ -1,69 +1,23 @@
-import React from 'react'
-import styles from '../Styles/cast.module.css'
-const Cast = () => {
-  return (
-    <>
-     <h1 style={{fontSize:'35px'   ,marginTop: "20px",
-     fontWeight: "600"}}>Cast</h1>
-     <div className={styles.parent}>
-    <div>
-       
-        <div className={styles.image}>
-            <img src="" alt="" />
-           
-        </div> 
-        <p>Name</p>
-            <p>Character Name</p>
-    </div>
- 
-    <div>
-       
-        <div className={styles.image}>
-            <img src="" alt="" />
-           
-        </div> 
-        <p>Name</p>
-            <p>Character Name</p>
-    </div>
-    <div>
-       
-        <div className={styles.image}>
-            <img src="" alt="" />
-           
-        </div> 
-        <p>Name</p>
-            <p>Character Name</p>
-    </div>
-    <div>
-       
-        <div className={styles.image}>
-            <img src="" alt="" />
-           
-        </div> 
-        <p>Name</p>
-            <p>Character Name</p>
-    </div>
-    <div>
-       
-        <div className={styles.image}>
-            <img src="" alt="" />
-           
-        </div> 
-        <p>Name</p>
-            <p>Character Name</p>
-    </div>
-    <div>
-       
-        <div className={styles.image}>
-            <img src="" alt="" />
-           
-        </div> 
-        <p>Name</p>
-            <p>Character Name</p>
-    </div>
-    </div>
-    </>
-  )
-}
 
-export default Cast
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+
+import Styles from  "../Styles/circleRating.module.css";
+
+const CircleRating = ({vote_average}) => {
+
+    return (
+    <div className={Styles.circleRating}>
+      <CircularProgressbar
+        value={vote_average}
+        maxValue={10}
+        text={vote_average}
+        styles={buildStyles({
+          pathColor: vote_average < 5 ? "red" : vote_average < 7 ? "orange" : "green",
+        })}
+      />
+    </div>
+  );
+};
+
+export default CircleRating;
