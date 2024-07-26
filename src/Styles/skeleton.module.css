@@ -1,0 +1,212 @@
+.skeletonWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .carouselWrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    width: 100%;
+    gap: 20px;
+  }
+  
+  .carouselItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 300px;
+    max-width: 300px;
+    position: relative; /* Needed for shimmer effect */
+  }
+  
+  .carouselItem > div {
+    margin-bottom: 10px;
+  }
+  
+  /* Shimmer Effect */
+  .skeleton {
+    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  
+  /* Specific sizes for skeletons */
+  .skeleton-title {
+    width: 200px;
+    height: 40px;
+    margin-bottom: 20px;
+  }
+  
+  .skeleton-carousel-item {
+    width: 300px;
+    height: 200px;
+  }
+  
+  .skeleton-text {
+    width: 200px;
+    height: 20px;
+    margin-bottom: 10px;
+  }
+  
+  /* Media Queries */
+  
+  /* For 1366×768 */
+  @media (max-width: 1366px) {
+    .carouselItem {
+      min-width: 250px;
+      max-width: 250px;
+    }
+  
+    .skeleton-title {
+      width: 180px;
+      height: 36px;
+    }
+  
+    .skeleton-carousel-item {
+      width: 250px;
+      height: 180px;
+    }
+  
+    .skeleton-text {
+      width: 180px;
+      height: 18px;
+    }
+  }
+  
+  /* For 1536×864 */
+  @media (max-width: 1536px) {
+    .carouselItem {
+      min-width: 270px;
+      max-width: 270px;
+    }
+  
+    .skeleton-title {
+      width: 190px;
+      height: 38px;
+    }
+  
+    .skeleton-carousel-item {
+      width: 270px;
+      height: 190px;
+    }
+  
+    .skeleton-text {
+      width: 190px;
+      height: 19px;
+    }
+  }
+  
+  /* For 1280×720 */
+  @media (max-width: 1280px) {
+    .carouselItem {
+      min-width: 230px;
+      max-width: 230px;
+    }
+  
+    .skeleton-title {
+      width: 170px;
+      height: 34px;
+    }
+  
+    .skeleton-carousel-item {
+      width: 230px;
+      height: 170px;
+    }
+  
+    .skeleton-text {
+      width: 170px;
+      height: 17px;
+    }
+  }
+  
+  /* For 1440×900 */
+  @media (max-width: 1440px) {
+    .carouselItem {
+      min-width: 250px;
+      max-width: 250px;
+    }
+  
+    .skeleton-title {
+      width: 180px;
+      height: 36px;
+    }
+  
+    .skeleton-carousel-item {
+      width: 250px;
+      height: 180px;
+    }
+  
+    .skeleton-text {
+      width: 180px;
+      height: 18px;
+    }
+  }
+  
+  /* For 1600×900 */
+  @media (max-width: 1600px) {
+    .carouselItem {
+      min-width: 270px;
+      max-width: 270px;
+    }
+  
+    .skeleton-title {
+      width: 190px;
+      height: 38px;
+    }
+  
+    .skeleton-carousel-item {
+      width: 270px;
+      height: 190px;
+    }
+  
+    .skeleton-text {
+      width: 190px;
+      height: 19px;
+    }
+  }
+  
+  /* For mobile screens (480px and below) */
+  @media (max-width: 480px) {
+    .skeletonWrapper {
+      padding: 10px;
+    }
+  
+    .carouselWrapper {
+      gap: 10px;
+    }
+  
+    .carouselItem {
+      min-width: 150px;
+      max-width: 150px;
+    }
+  
+    .skeleton-title {
+      width: 120px;
+      height: 30px;
+    }
+  
+    .skeleton-carousel-item {
+      width: 150px;
+      height: 100px;
+    }
+  
+    .skeleton-text {
+      width: 120px;
+      height: 15px;
+    }
+  }
+  
