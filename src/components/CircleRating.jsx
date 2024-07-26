@@ -4,16 +4,16 @@ import "react-circular-progressbar/dist/styles.css";
 
 import Styles from  "../Styles/circleRating.module.css";
 
-const CircleRating = () => {
-  let rating =8.9;
+const CircleRating = ({vote_average}) => {
+  
     return (
     <div className={Styles.circleRating}>
       <CircularProgressbar
-        value={rating}
+        value={vote_average}
         maxValue={10}
-        text={rating}
+        text={vote_average}
         styles={buildStyles({
-          pathColor: rating < 5 ? "red" : rating < 7 ? "orange" : "green",
+          pathColor: vote_average < 5 ? "red" : vote_average < 7 ? "orange" : "green",
         })}
       />
     </div>
