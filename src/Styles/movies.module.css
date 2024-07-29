@@ -1,0 +1,36 @@
+/* Movies.css */
+.container {
+    margin: 10px auto 15px;
+  }
+  
+  .title {
+    margin-bottom: 10px;
+    font-weight: bolder;
+    font-size: 34px;
+  }
+  
+  .card {
+    display: ruby;
+    /* flex-wrap: wrap; */
+    gap: 10px;
+  }
+  
+  .card-item {
+    margin-right: 10px;
+  }
+  
+  .card-item img {
+    height: 480px;
+    width: auto;
+  }
+  
+  .card-item span {
+    /* display: block; */
+    font-weight: bold;
+    margin-top: 5px;
+  }
+  
+  .card-item p {
+    margin: 5px 0;
+  }
+  

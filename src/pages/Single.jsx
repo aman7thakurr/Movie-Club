@@ -93,14 +93,17 @@ const Single = () => {
         <div
           className="bgBlur"
           style={{
-            backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
+            background: `linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.90) 100%),no-repeat, url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
             width: "100%",
             height: "100%",
             position: "absolute",
             top: '0',
             left: "0",
-            opacity: "0.5",
+            opacity: "0.3",
             filter: "blur(4px)",
+            backgroundRepeat:'no-repeat',
+            backgroundPosition:'center',
+           
           }}
         ></div>
 
