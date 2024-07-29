@@ -4,6 +4,7 @@ import axios from 'axios';
 import NavBar from '../components/Navbar';
 import Footer from '../components/Footer';
 import CircleRating from '../components/CircleRating';
+import SkeletonHome from '../skeleton/SkeletonHome'; // Assuming you have a similar Skeleton component
 
 const WebSeries = () => {
   const params = useParams();
@@ -12,7 +13,7 @@ const WebSeries = () => {
   const [totalPageNo, setTotalPageNo] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const [hasMore, setHasMore] = useState(true); // To track if there is more data to load
   const apiKey = 'ef6d335af07081934aa88a703974311c';
 
   const fetchData = async () => {
@@ -33,6 +34,10 @@ const WebSeries = () => {
           ...response.data.results
         ]);
         setTotalPageNo(response.data.total_pages);
+
+        if (pageNo >= response.data.total_pages) {
+          setHasMore(false); // No more data to load
+        }
       } else {
         console.error('Unexpected response structure:', response);
       }
@@ -44,12 +49,19 @@ const WebSeries = () => {
     }
   };
 
+  // const handleScroll = () => {
+  //   if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
+  //     if (pageNo < totalPageNo && !loading) {
+  //       setPageNo(prev => prev + 1);
+  //     }
+  //   }
+  // };
+
   const handleLoadMore = () => {
     if (pageNo < totalPageNo) {
       setPageNo(prev => prev + 1);
     }
   };
-
   useEffect(() => {
     fetchData();
   }, [pageNo]);
@@ -57,8 +69,13 @@ const WebSeries = () => {
   useEffect(() => {
     setPageNo(1);
     setData([]);
-    fetchData();
+    setHasMore(true); // Reset 'hasMore' when params change
   }, [params.explore]);
+
+  // useEffect(() => {
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => window.removeEventListener('scroll', handleScroll);
+  // }, [loading, pageNo]);
 
   return (
     <>
@@ -69,48 +86,49 @@ const WebSeries = () => {
             Popular Web Series
           </p>
           {error && <p style={{ color: 'red' }}>{error}</p>}
-          {data.length === 0 && !loading && !error ? (
-            <p>No web series found.</p>
-          ) : (
-            <div className="card" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-              {data.map(show => (
-                <Link 
-                  to="/Single"
-                  state={{ show }} 
-                  key={show.id}
-                  style={{ textDecoration: 'none', color: 'inherit' }}
-                >
-                  <div className="swiper-slide" style={{ margin: '10px', textAlign: 'center' }}>
-                    <img 
-                      style={{ height: '480px', width: 'auto', borderRadius: '8px' }}
-                      src={`https://image.tmdb.org/t/p/original${show.poster_path}`}
-                      alt={show.name || 'Web series poster'}
-                    />
-                    <CircleRating vote_average={show.vote_average.toFixed(1)} />
-                    <span style={{ display: 'block', marginTop: '10px', fontWeight: 'bold' }}>{show.name}</span>
-                    <p>{show.first_air_date}</p>
-                  </div>
-                </Link>
-              ))}
-              {loading && <p>Loading more...</p>}
-            </div>
+          <div className="card" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+            {data.map(show => (
+              <Link 
+                to="/Single"
+                state={{ tv: show }} // Ensure the state key matches what Single expects
+                key={show.id}
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
+                <div className="swiper-slide" style={{ margin: '10px', textAlign: 'center' }}>
+                  <img 
+                    style={{ height: '480px', width: 'auto', borderRadius: '8px' }}
+                    src={`https://image.tmdb.org/t/p/original${show.poster_path}`}
+                    alt={show.name || 'Web series poster'}
+                  />
+                  <CircleRating vote_average={show.vote_average.toFixed(1)} />
+                  <span style={{ display: 'block', marginTop: '10px', fontWeight: 'bold' }}>{show.name}</span>
+                  <p>{show.first_air_date}</p>
+                </div>
+              </Link>
+            ))}
+            {loading && (
+              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <SkeletonHome />
+              </div>
+            )}
+          </div>
+          {hasMore && !loading && (
+            <button
+              onClick={handleLoadMore}
+              style={{
+                padding: '10px 20px',
+                margin: '20px',
+                fontSize: '16px',
+                cursor: 'pointer',
+                border: 'none',
+                borderRadius: '5px',
+                backgroundColor: '#007bff',
+                color: '#fff'
+              }}
+            >
+              Load More
+            </button>
           )}
-          <button
-            onClick={handleLoadMore}
-            disabled={loading || pageNo >= totalPageNo}
-            style={{
-              padding: '10px 20px',
-              marginTop: '20px',
-              fontSize: '16px',
-              cursor: loading || pageNo >= totalPageNo ? 'not-allowed' : 'pointer',
-              backgroundColor: '#007bff',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '5px',
-            }}
-          >
-            {loading ? 'Loading...' : pageNo >= totalPageNo ? 'No More Data' : 'Load More'}
-          </button>
         </div>
       </div>
       <a href="#" className="top">Back to Top &#8593;</a>

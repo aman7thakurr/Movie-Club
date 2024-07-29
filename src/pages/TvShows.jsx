@@ -72,10 +72,10 @@ const TvShows = () => {
               <div className="card" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {data.map(show => (
                   <Link 
-                    to="/Single"
-                    state={{ show }} 
-                    key={show.id}
-                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  to="/Single"
+                state={{ tv: show }} // Ensure the state key matches what Single expects
+                key={show.id}
+                style={{ textDecoration: 'none', color: 'inherit' }}
                   >
                     <div className="swiper-slide" style={{ margin: '10px', textAlign: 'center' }}>
                       <img 

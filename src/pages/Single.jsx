@@ -1,33 +1,46 @@
-import { useState, useEffect } from "react";
-import { FcStart } from "react-icons/fc";
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import NavBar from '../components/Navbar';
+import Footer from '../components/Footer';
+import CircleRating from '../components/CircleRating';
+import CarouselElement from '../components/CarouselElement';
+import Cast from '../components/Cast';
 import styles from "../Styles/single.module.css";
-import NavBar from "../components/Navbar";
-import Footer from "../components/Footer";
-import CircleRating from "../components/CircleRating";
-import CarouselElement from "../components/CarouselElement";
-import Cast from "../components/Cast";
-import { useLocation } from "react-router-dom";
+import { FcStart } from "react-icons/fc";
 
-const API_KEY = 'ef6d335af07081934aa88a703974311c'; 
+const API_KEY = 'ef6d335af07081934aa88a703974311c';
 
 const Single = () => {
   const location = useLocation();
-  const { movie } = location.state || {}; 
+  const { movie, tv } = location.state || {}; // Handle both 'movie' and 'tv'
 
   const [similarData, setSimilarData] = useState([]);
   const [recommendationData, setRecommendationData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [genreList, setGenreList] = useState([]); 
-  const [movieGenres, setMovieGenres] = useState([]); 
+  const [genreList, setGenreList] = useState([]);
+  const [contentGenres, setContentGenres] = useState([]);
 
   useEffect(() => {
+    const contentId = movie?.id || tv?.id;
+    const isMovie = !!movie;
+
+    if (!contentId) {
+      setError(new Error("No content data found."));
+      setLoading(false);
+      return;
+    }
+
     const fetchData = async () => {
       try {
         const urls = [
-          `https://api.themoviedb.org/3/movie/${movie.id}/similar?api_key=${API_KEY}`,
-          `https://api.themoviedb.org/3/movie/${movie.id}/recommendations?api_key=${API_KEY}`,
-          `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}` // Fetch genre list
+          isMovie
+            ? `https://api.themoviedb.org/3/movie/${contentId}/similar?api_key=${API_KEY}`
+            : `https://api.themoviedb.org/3/tv/${contentId}/similar?api_key=${API_KEY}`,
+          isMovie
+            ? `https://api.themoviedb.org/3/movie/${contentId}/recommendations?api_key=${API_KEY}`
+            : `https://api.themoviedb.org/3/tv/${contentId}/recommendations?api_key=${API_KEY}`,
+          `https://api.themoviedb.org/3/genre/${isMovie ? 'movie' : 'tv'}/list?api_key=${API_KEY}`
         ];
 
         const [similarResponse, recommendationResponse, genreResponse] = await Promise.all(
@@ -41,25 +54,23 @@ const Single = () => {
         const [similarData, recommendationData, genreData] = await Promise.all([
           similarResponse.json(),
           recommendationResponse.json(),
-          genreResponse.json() 
+          genreResponse.json()
         ]);
 
-        setSimilarData(similarData.results);
-        setRecommendationData(recommendationData.results);
-        setGenreList(genreData.genres); 
-        
+        setSimilarData(similarData.results || []);
+        setRecommendationData(recommendationData.results || []);
+        setGenreList(genreData.genres || []);
+
         const genreMap = genreData.genres.reduce((acc, genre) => {
           acc[genre.id] = genre.name;
           return acc;
         }, {});
 
-        const genres = movie.genre_ids
-          ? movie.genre_ids
-              .map(id => genreMap[id]) 
-              .filter(name => name) 
-          : [];
+        const genres = isMovie
+          ? movie?.genre_ids?.map(id => genreMap[id]).filter(name => name)
+          : tv?.genre_ids?.map(id => genreMap[id]).filter(name => name);
 
-        setMovieGenres(genres);
+        setContentGenres(genres);
 
         setLoading(false);
       } catch (error) {
@@ -69,7 +80,7 @@ const Single = () => {
     };
 
     fetchData();
-  }, [movie.id]);
+  }, [movie, tv]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -79,11 +90,19 @@ const Single = () => {
     return <div>Error fetching data: {error.message}</div>;
   }
 
-  if (!movie) return <div>Movie data not available</div>;
+  const isMovie = !!movie;
+  const content = isMovie ? movie : tv;
+  const backdropPath = content?.backdrop_path;
+  const posterPath = content?.poster_path;
+  const title = isMovie ? content?.title : content?.name;
+  const originalTitle = isMovie ? content?.original_title : content?.original_name;
+  const overview = content?.overview;
+  const voteAverage = content?.vote_average;
+  const releaseDate = isMovie ? content?.release_date : content?.first_air_date;
+  const runtime = isMovie ? content?.runtime : null;
 
-  
-  const posterSrc = movie.poster_path
-    ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
+  const posterSrc = posterPath
+    ? `https://image.tmdb.org/t/p/original${posterPath}`
     : "https://via.placeholder.com/300x450?text=No+Image";
 
   return (
@@ -93,7 +112,7 @@ const Single = () => {
         <div
           className="bgBlur"
           style={{
-            background: `linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.90) 100%),no-repeat, url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
+            background: `linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.90) 100%),no-repeat, url(https://image.tmdb.org/t/p/original${backdropPath})`,
             width: "100%",
             height: "100%",
             position: "absolute",
@@ -101,9 +120,8 @@ const Single = () => {
             left: "0",
             opacity: "0.3",
             filter: "blur(4px)",
-            backgroundRepeat:'no-repeat',
-            backgroundPosition:'center',
-           
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
           }}
         ></div>
 
@@ -112,20 +130,20 @@ const Single = () => {
             <img
               style={{ height: '100%', width: '100%' }}
               src={posterSrc}
-              alt={movie.title}
+              alt={title}
             />
           </div>
 
           <div className={styles.details}>
             <div className={styles.title}>
-              <h1>{movie.title}</h1>
+              <h1>{title}</h1>
             </div>
             <div className={styles.subTitle}>
-              <h3>{movie.original_title || "Movie Sub Title"}</h3>
+              <h3>{originalTitle || "Sub Title"}</h3>
             </div>
             <div className={styles.genre}>
-              {movieGenres.length > 0 ? (
-                movieGenres.map((genre, index) => (
+              {contentGenres.length > 0 ? (
+                contentGenres.map((genre, index) => (
                   <span key={index} className={styles.genreItem}>
                     {genre}
                   </span>
@@ -136,7 +154,7 @@ const Single = () => {
             </div>
             <div className={styles.rating}>
               <span>
-                <CircleRating vote_average={movie.vote_average.toFixed(1)} />
+                <CircleRating vote_average={voteAverage?.toFixed(1)} />
               </span>
               <span>
                 <FcStart style={{ fontSize: "82px" }} />
@@ -147,22 +165,22 @@ const Single = () => {
             </div>
             <div className={styles.heading}>Overview</div>
             <div className={styles.description}>
-              <span>{movie.overview || "No description available"}</span>
+              <span>{overview || "No description available"}</span>
             </div>
             <div className={styles.info}>
-              <span>Status: {movie.status || "N/A"}</span>
-              <span>Release Date: {movie.release_date || "N/A"}</span>
+              <span>Status: {content?.status || "N/A"}</span>
+              <span>Release Date: {releaseDate || "N/A"}</span>
               <span>
-                Runtime: {movie.runtime ? `${movie.runtime} minutes` : "N/A"}
+                Runtime: {runtime ? `${runtime} minutes` : "N/A"}
               </span>
             </div>
             <hr />
             <div className={styles.info}>
-              <span>Director: {movie.director || "N/A"}</span>
+              <span>Director: {content?.director || "N/A"}</span>
             </div>
             <hr />
             <div className={styles.info}>
-              <span>Writer: {movie.writer || "N/A"}</span>
+              <span>Writer: {content?.writer || "N/A"}</span>
             </div>
             <hr />
           </div>
@@ -170,9 +188,9 @@ const Single = () => {
       </div>
 
       <div className="container" style={{ margin: "0 auto", padding: "0 15px" }}>
-        <Cast movieId={movie.id} />
-        <CarouselElement title={"Recommendation"} popularData={recommendationData} />
-        <CarouselElement title={"Similar"} popularData={similarData} />
+        <Cast contentId={content?.id} isMovie={isMovie} />
+        <CarouselElement title={"Recommendation"} popularData={recommendationData} isTV={!isMovie} />
+        <CarouselElement title={"Similar"} popularData={similarData} isTV={!isMovie} />
       </div>
 
       <Footer />
