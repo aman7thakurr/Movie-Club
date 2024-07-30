@@ -13,7 +13,7 @@ const WebSeries = () => {
   const [totalPageNo, setTotalPageNo] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [hasMore, setHasMore] = useState(true); // To track if there is more data to load
+  const [hasMore, setHasMore] = useState(true); 
   const apiKey = 'ef6d335af07081934aa88a703974311c';
 
   const fetchData = async () => {
