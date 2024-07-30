@@ -36,7 +36,7 @@ const WebSeries = () => {
         setTotalPageNo(response.data.total_pages);
 
         if (pageNo >= response.data.total_pages) {
-          setHasMore(false); // No more data to load
+          setHasMore(false); 
         }
       } else {
         console.error('Unexpected response structure:', response);
