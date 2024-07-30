@@ -12,7 +12,7 @@ function NavBar() {
     e.preventDefault()
 }
   return (
-    <nav className={styles.navbar}> {/* Use styles.navbar for the main nav */}
+    <nav className={styles.navbar}> 
       <div className={styles["nav-container"]}> {/* Use styles["nav-container"] */}
         <NavLink exact to="/" className={styles["nav-logo"]}> {/* Use styles["nav-logo"] */}
           <span>Movie Club</span>
