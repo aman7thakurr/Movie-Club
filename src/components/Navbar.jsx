@@ -21,7 +21,7 @@ function NavBar() {
           </span>
         </NavLink>
 
-        <ul className={click ? `${styles["nav-menu"]} ${styles.active}` : styles["nav-menu"]}> {/* Conditional class based on click state */}
+        <ul className={click ? `${styles["nav-menu"]} ${styles.active}` : styles["nav-menu"]}> 
           <li className={styles["nav-item"]}>
             <NavLink
               exact
