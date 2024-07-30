@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import styles from "../Styles/navbar.module.css"; // Import CSS Module
+import styles from "../Styles/navbar.module.css";
 import { CodeIcon, HamburgetMenuClose, HamburgetMenuOpen } from "./Icons";
 import { IoSearchOutline } from "react-icons/io5";
 import userIcon from '../assets/user.png'
