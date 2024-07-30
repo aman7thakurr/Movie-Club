@@ -69,7 +69,7 @@ const WebSeries = () => {
   useEffect(() => {
     setPageNo(1);
     setData([]);
-    setHasMore(true); // Reset 'hasMore' when params change
+    setHasMore(true); 
   }, [params.explore]);
 
   // useEffect(() => {
