@@ -13,7 +13,7 @@ function NavBar() {
 }
   return (
     <nav className={styles.navbar}> 
-      <div className={styles["nav-container"]}> {/* Use styles["nav-container"] */}
+      <div className={styles["nav-container"]}> 
         <NavLink exact to="/" className={styles["nav-logo"]}> 
           <span>Movie Club</span>
           <span className={styles.icon}>
