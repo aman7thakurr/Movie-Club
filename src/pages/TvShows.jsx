@@ -61,9 +61,43 @@ const TvShows = () => {
       <NavBar />
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <div className="container" style={{ marginBottom: '15px', marginTop: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <p style={{ marginBottom: '10px', fontWeight: 'bolder', fontSize: '34px' }}>
-            TV Shows
-          </p>
+        <div className="movieheader" style={{display: 'flex',justifyContent:'center' ,width:'100%',paddingRight:'6%',paddingLeft:'6%'}}>
+            
+            <div className='pDiv'>    <p
+                  style={{
+                    marginBottom: "10px",
+                    fontWeight: "bolder",
+                    fontSize: "34px",width: 'max-content'
+                  }}
+                >
+                  Tv Shows
+                </p>
+                </div>
+              
+  
+  <div className='selectDiv'  style={{width:'100%'}}>
+    <span className='spanS' style={{position:'relative',right:'-64%', color:'black'}} ><select className='selectS' name="Genre" id="" style={{width:'17%',borderRadius:'21px', color:'black'}}>
+      <option value="action" style={{color:'black'}}>-- Select Genre --</option>
+      <option value="action" style={{color:'black'}}>Action</option>
+      <option value="adventure" style={{color:'black'}}>Adventure</option>
+      <option value="animation" style={{color:'black'}}>Animation</option>
+      <option value="comedy" style={{color:'black'}}>Comedy</option>
+      <option value="drama" style={{color:'black'}}>Drama</option>
+      <option value="family" style={{color:'black'}}>Family</option>
+      <option value="kids" style={{color:'black'}}>Kids</option>
+      <option value="fantasy" style={{color:'black'}}>Fantasy</option>
+      <option value="sci-fi" style={{color:'black'}}>Sci-Fi</option>
+      </select></span>
+    <span className='spanS' style={{position:'relative',right:'-66%',color:'black'}}><select className='selectS' name="Sort" id=""  style={{width:'17%',borderRadius:'21px',color:'black'}}>
+      <option value="" >-- Sort By --</option>
+      <option value="" >Popularity : Ascending</option>
+      <option value="" >Popularity : Descending</option>
+      <option value="" >Rating : Ascending</option> 
+      <option value="" >Rating : Descending</option>
+      </select></span>
+    
+    </div>
+            </div>
           {error && <p style={{ color: 'red' }}>{error}</p>}
           {data.length === 0 && !loading && !error ? (
             <p>No TV shows found.</p>

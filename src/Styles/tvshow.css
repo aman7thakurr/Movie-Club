@@ -1,33 +1,55 @@
-    /* Add this to your CSS file */
+/* Add this to your CSS file */
 .pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.page-link:hover {
+  background-color: #f1f1f1;
+}
+
+.active .page-link {
+  background-color: #007bff;
+  color: white;
+}
+
+.disabled .page-link {
+  color: #ccc;
+}
+
+
+@media (max-width : 768px) {
+  
+  .movieheader{
+    flex-direction: column;
+    
+  }
+
+  .selectDiv{
     display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 20px 0;
+    flex-direction: column;
+  width: 100%;
   }
-  
-  .page-item {
-    margin: 0 5px;
+  .spanS{
+    right: 0;
+    left: 0;
+    width: 100%;
   }
-  
-  .page-link {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    text-decoration: none;
-    color: #007bff;
+  .selectS{
+    width: 70% !important;
   }
-  
-  .page-link:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .active .page-link {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .disabled .page-link {
-    color: #ccc;
-  }
-  
+}
