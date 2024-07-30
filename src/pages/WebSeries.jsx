@@ -4,7 +4,7 @@ import axios from 'axios';
 import NavBar from '../components/Navbar';
 import Footer from '../components/Footer';
 import CircleRating from '../components/CircleRating';
-import SkeletonHome from '../skeleton/SkeletonHome'; // Assuming you have a similar Skeleton component
+import SkeletonHome from '../skeleton/SkeletonHome'; 
 
 const WebSeries = () => {
   const params = useParams();
