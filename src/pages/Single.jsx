@@ -12,8 +12,7 @@ const API_KEY = 'ef6d335af07081934aa88a703974311c';
 
 const Single = () => {
   const location = useLocation();
-  const { movie, tv } = location.state || {}; // Handle both 'movie' and 'tv'
-
+  const { movie, tv } = location.state || {}; 
   const [similarData, setSimilarData] = useState([]);
   const [recommendationData, setRecommendationData] = useState([]);
   const [loading, setLoading] = useState(true);
