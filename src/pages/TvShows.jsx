@@ -107,7 +107,7 @@ const TvShows = () => {
                 {data.map(show => (
                   <Link 
                   to="/Single"
-                state={{ tv: show }} // Ensure the state key matches what Single expects
+                state={{ tv: show }} 
                 key={show.id}
                 style={{ textDecoration: 'none', color: 'inherit' }}
                   >
