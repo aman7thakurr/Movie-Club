@@ -18,3 +18,10 @@ export const fetchMovies = (page, sortBy, genre) => api.get('discover/movie', {
       with_genres: genre, 
   },
 });
+export const fetchTvShows = (page, sortBy, genre) => api.get('discover/tv', {
+    params: {
+        page,
+        sort_by: sortBy,
+        with_genres: genre, 
+    },
+});
