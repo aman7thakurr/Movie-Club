@@ -8,11 +8,14 @@ import Cast from '../components/Cast';
 import styles from "../Styles/single.module.css";
 import { FcStart } from "react-icons/fc";
 
+
+
 const API_KEY = 'ef6d335af07081934aa88a703974311c';
 
 const Single = () => {
   const location = useLocation();
   const { movie, tv } = location.state || {}; 
+
   const [similarData, setSimilarData] = useState([]);
   const [recommendationData, setRecommendationData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -82,7 +85,8 @@ const Single = () => {
   }, [movie, tv]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div style={{display:'flex',justifyContent:'center',alignItems: 'center', marginTop: '10em'}}>
+     <div className='loader'></div></div>
   }
 
   if (error) {
