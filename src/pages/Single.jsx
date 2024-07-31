@@ -85,8 +85,9 @@ const Single = () => {
   }, [movie, tv]);
 
   if (loading) {
-    return <div style={{display:'flex',justifyContent:'center',alignItems: 'center', marginTop: '10em'}}>
-     <div className='loader'></div></div>
+    return <><NavBar/>
+     <div style={{display:'flex',justifyContent:'center',alignItems: 'center', marginTop: '10em'}}>
+     <div className='loader'></div></div></>
   }
 
   if (error) {
