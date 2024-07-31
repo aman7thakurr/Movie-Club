@@ -17,8 +17,8 @@ const CarouselElement = ({ title, popularData = [], isTV = false }) => {
   }
 
   return (
-    <div className="container" style={{ marginBottom: '15px', marginTop: '10px' }}>
-      <p style={{ marginBottom: '10px', fontWeight: 'bolder', fontSize: '34px' }}>{title}</p>
+    <div className="container" style={{ marginBottom: '15px', marginTop: '10px',   }}>
+      <p style={{ marginBottom: '10px', fontWeight: 'bolder', fontSize: '34px', }}>{title}</p>
       <div className="card">
         <Carousel responsive={responsive}>
           {popularData.map(item => (
@@ -27,15 +27,15 @@ const CarouselElement = ({ title, popularData = [], isTV = false }) => {
               state={{ movie: isTV ? null : item, tv: isTV ? item : null }}
               key={item.id}
             >
-              <div className="swiper-slide" style={{ marginRight: "10px" }}>
+              <div className="swiper-slide" style={{marginRight : '10px' }}>
                 <img 
-                  style={{ height: '480px', width: 'auto' }}
+                  style={{marginLeft : '17%', height: '380px', width: 'auto' }}
                   src={item.poster_path ? `https://image.tmdb.org/t/p/original${item.poster_path}` : 'https://via.placeholder.com/300x450?text=No+Image'}
                   alt={item.title || item.name || 'Poster'}
                 />
-                <CircleRating vote_average={item.vote_average ? item.vote_average.toFixed(1) : 'N/A'} />
-                <span>{item.title || item.name || 'No Title'}</span>
-                <p>{item.release_date || item.first_air_date || 'No Release Date'}</p>
+                <p style={{marginLeft : '17%'}}><CircleRating vote_average={item.vote_average ? item.vote_average.toFixed(1) : 'N/A'} /></p>
+                <span style={{marginLeft : '17%',}}>{item.title || item.name || 'No Title'}</span>
+                <p style={{marginLeft : '17%', }}>{item.release_date || item.first_air_date || 'No Release Date'}</p>
               </div>
             </Link>
           ))}
