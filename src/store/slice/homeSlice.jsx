@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchPopular, fetchTrending, fetchTopRated } from '../../util/Api';
+import { fetchPopular, fetchTrending, fetchTopRated } from '../../util/api';
 
 export const fetchPopularData = createAsyncThunk('home/fetchPopularData', async () => {
     const response = await fetchPopular();
