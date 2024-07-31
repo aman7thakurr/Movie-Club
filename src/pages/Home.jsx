@@ -1,96 +1,58 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPopularData, fetchTrendingData, fetchTopRatedData } from '../store/slice/homeSlice';
 import NavBar from '../components/Navbar';
 import Footer from '../components/Footer';
 import CarouselElement from '../components/CarouselElement';
-import SkeletonHome from '../skeleton/SkeletonHome'; 
+import SkeletonHome from '../skeleton/SkeletonHome';
 
 const Home = () => {
-  const [popularData, setPopularData] = useState([]);
-  const [trendingData, setTrendingData] = useState([]);
-  const [topRatedData, setTopRatedData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+    const dispatch = useDispatch();
+    const { popular, trending, topRated, status, error } = useSelector((state) => state.home);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const urls = [
-          'https://api.themoviedb.org/3/discover/movie?api_key=ef6d335af07081934aa88a703974311c',
-          'https://api.themoviedb.org/3/trending/movie/week?api_key=ef6d335af07081934aa88a703974311c',
-          'https://api.themoviedb.org/3/movie/popular?api_key=ef6d335af07081934aa88a703974311c'
-        ];
-
-        const [discoverResponse, trendingResponse, popularResponse] = await Promise.all(
-          urls.map(url => fetch(url))
-        );
-
-        if (!discoverResponse.ok || !trendingResponse.ok || !popularResponse.ok) {
-          throw new Error('Network response was not ok');
+    useEffect(() => {
+        if (status === 'idle') {
+            dispatch(fetchPopularData());
+            dispatch(fetchTrendingData());
+            dispatch(fetchTopRatedData());
         }
+    }, [dispatch, status]);
 
-        const [discoverData, trendingData, popularData] = await Promise.all([
-          discoverResponse.json(),
-          trendingResponse.json(),
-          popularResponse.json()
-        ]);
+    if (status === 'loading') {
+        return (
+            <>
+                <NavBar />
+                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                    <SkeletonHome />
+                </div>
+                <Footer />
+            </>
+        );
+    }
 
-        setPopularData(popularData.results);
-        setTrendingData(trendingData.results);
-        setTopRatedData(discoverData.results);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    };
+    if (status === 'failed') {
+        return (
+            <>
+                <NavBar />
+                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                    <div>Error fetching data: {error}</div>
+                </div>
+                <Footer />
+            </>
+        );
+    }
 
-    fetchData();
-  }, []);
-
-  if (loading) {
     return (
-      <>
-        <NavBar />
-        <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
-        <SkeletonHome /></div>
-        <Footer />
-      </>
+        <>
+            <NavBar />
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <CarouselElement title={'Trending'} popularData={trending} />
+                <CarouselElement title={"What's Popular"} popularData={popular} />
+                <CarouselElement title={'Top Rated'} popularData={topRated} />
+            </div>
+            <Footer />
+        </>
     );
-  }
-
-  if (error) {
-    return (
-      <>
-        <NavBar />
-        <div style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center"
-        }}>
-          <div>Error fetching data: {error.message}</div>
-        </div>
-        <Footer />
-      </>
-    );
-  }
-
-  return (
-    <>
-      <NavBar />
-      <div style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center"
-      }}>
-        <CarouselElement title={'Trending'} popularData={trendingData} />
-        <CarouselElement title={"What's Popular"} popularData={popularData} />
-        <CarouselElement title={'Top Rated'} popularData={topRatedData} />
-      </div>
-      <Footer />
-    </>
-  );
 };
 
 export default Home;
