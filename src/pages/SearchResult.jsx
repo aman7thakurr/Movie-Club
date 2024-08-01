@@ -58,18 +58,9 @@ const SearchResult = () => {
             <IoSearchOutline />
           </button>
         </form>
-        <h1 style={{fontSize: '26px'}}>Search Results  for {searchInput} </h1>
-        {loading && 
-    <>
-    {/* <NavBar /> */}
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '10em' }}>
-      <div className='loader'></div>
-    </div>
-  </>
-
-}
+        {loading && <p>Loading...</p>}
         {error && <p className={styles.error}>{error}</p>}
-        {results.length === 0 &&searchInput.length !== 0 && !loading && !error && <p>No results found.</p>}
+        {results.length === 0 && !loading && !error && <p>No results found.</p>}
         <div
           className="card"
           style={{
@@ -116,7 +107,6 @@ const SearchResult = () => {
           ))}
         </div>
       </div>
-      
       <Footer />
     </>
   );

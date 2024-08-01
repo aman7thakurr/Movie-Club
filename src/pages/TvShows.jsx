@@ -19,34 +19,17 @@ const TvShows = () => {
   }, [dispatch, pageNo, genre, sortBy]);
 
   useEffect(() => {
-    dispatch(setPageNo(1)); // Reset to page 1 on genre or sort change
+    dispatch(setPageNo(1));
     dispatch(fetchTvShows({ page: 1, genre, sortBy }));
   }, [genre, sortBy]);
 
   const handlePageChange = ({ selected }) => {
-    dispatch(setPageNo(selected + 1));
-  };
-
-  const handleGenreChange = (event) => {
-    dispatch(setGenre(event.target.value));
-  };
-
-  const handleSortChange = (event) => {
-    dispatch(setSortBy(event.target.value));
+    const newPageNo = selected + 1;
+    dispatch(setPageNo(newPageNo));
   };
 
   const isLoading = status === 'loading';
-  
-  if (status === 'loading') {
-    return (
-      <>
-      <NavBar />
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '10em' }}>
-        <div className='loader'></div>
-      </div>
-    </>
-    );
-  }
+
   return (
     <>
       <NavBar />
@@ -58,14 +41,13 @@ const TvShows = () => {
                 Tv Shows
               </p>
             </div>
-
             <div className='selectDiv' style={{ width: '100%' }}>
               <span className='spanS' style={{ position: 'relative', right: '-64%', color: 'black' }}>
                 <select
                   className='selectS'
                   name="Genre"
                   value={genre}
-                  onChange={handleGenreChange}
+                  onChange={(e) => dispatch(setGenre(e.target.value))}
                   style={{ width: '17%', borderRadius: '21px', color: 'black' }}
                 >
                   <option value="">-- Select Genre --</option>
@@ -85,10 +67,10 @@ const TvShows = () => {
                   className='selectS'
                   name="Sort"
                   value={sortBy}
-                  onChange={handleSortChange}
+                  onChange={(e) => dispatch(setSortBy(e.target.value))}
                   style={{ width: '17%', borderRadius: '21px', color: 'black' }}
                 >
-                <option value="air_date.asc">Air Date: Ascending</option>
+                  <option value="air_date.asc">Air Date: Ascending</option>
                   <option value="air_date.desc">Air Date: Descending</option>
                   <option value="popularity.asc">Popularity: Ascending</option>
                   <option value="popularity.desc">Popularity: Descending</option>
@@ -118,19 +100,16 @@ const TvShows = () => {
                         src={`https://image.tmdb.org/t/p/original${show.poster_path}`}
                         alt={show.name || 'Show poster'}
                       />
-                      <CircleRating vote_average={show.vote_average.toFixed(1)} />
+                      {/* <CircleRating vote_average={show.vote_average.toFixed(1)} /> */}
                       <span style={{ display: 'block', marginTop: '10px', fontWeight: 'bold' }}>{show.name}</span>
                       <p>{show.first_air_date}</p>
                     </div>
                   </Link>
                 ))}
                 {isLoading && (
-                  <>
-                  <NavBar />
-                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '10em' }}>
-                    <div className='loader'></div>
+                  <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                    <SkeletonHome />
                   </div>
-                </>
                 )}
               </div>
               <ReactPaginate
@@ -138,7 +117,7 @@ const TvShows = () => {
                 nextLabel={'Next'}
                 breakLabel={'...'}
                 pageCount={totalPageNo}
-                marginPagesDisplayed={1}
+                marginPagesDisplayed={2}
                 pageRangeDisplayed={3}
                 onPageChange={handlePageChange}
                 containerClassName={'pagination'}

@@ -27,26 +27,8 @@ const WebSeries = () => {
     }
   };
 
-  const handleGenreChange = (event) => {
-    dispatch(setGenre(event.target.value));
-  };
-
-  const handleSortChange = (event) => {
-    dispatch(setSortBy(event.target.value));
-  };
-
   const isLoading = status === 'loading';
 
-  if (status === 'loading') {
-    return (
-      <>
-      <NavBar />
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '10em' }}>
-        <div className='loader'></div>
-      </div>
-    </>
-    );
-  }
   return (
     <>
       <NavBar />
@@ -65,10 +47,10 @@ const WebSeries = () => {
                   className='selectS'
                   name="Genre"
                   value={genre}
-                  onChange={handleGenreChange}
+                  onChange={(e) => dispatch(setGenre(e.target.value))}
                   style={{ width: '17%', borderRadius: '21px', color: 'black' }}
                 >
-                 <option value="">-- Select Genre --</option>
+                  <option value="">-- Select Genre --</option>
                   <option value="10759">Action</option>
                   <option value="16">Animation</option>
                   <option value="80">Crime</option>
@@ -85,7 +67,7 @@ const WebSeries = () => {
                   className='selectS'
                   name="Sort"
                   value={sortBy}
-                  onChange={handleSortChange}
+                  onChange={(e) => dispatch(setSortBy(e.target.value))}
                   style={{ width: '17%', borderRadius: '21px', color: 'black' }}
                 >
                   <option value="air_date.asc">Air Date: Ascending</option>
@@ -102,31 +84,28 @@ const WebSeries = () => {
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <div className="card" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
             {data.map(show => (
-              <Link
+              <Link 
                 to="/Single"
                 state={{ tv: show }}
                 key={show.id}
                 style={{ textDecoration: 'none', color: 'inherit' }}
               >
                 <div className="swiper-slide" style={{ margin: '10px', textAlign: 'center' }}>
-                  <img
+                  <img 
                     style={{ height: '480px', width: 'auto', borderRadius: '8px' }}
                     src={`https://image.tmdb.org/t/p/original${show.poster_path}`}
                     alt={show.name || 'Web series poster'}
                   />
-                  <CircleRating vote_average={show.vote_average.toFixed(1)} />
+                  {/* <CircleRating vote_average={show.vote_average.toFixed(1)} /> */}
                   <span style={{ display: 'block', marginTop: '10px', fontWeight: 'bold' }}>{show.name}</span>
                   <p>{show.first_air_date}</p>
                 </div>
               </Link>
             ))}
             {isLoading && (
-             <>
-             <NavBar />
-             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '10em' }}>
-               <div className='loader'></div>
-             </div>
-           </>
+              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <SkeletonHome />
+              </div>
             )}
           </div>
           {hasMore && !isLoading && (

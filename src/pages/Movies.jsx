@@ -46,16 +46,16 @@ const handleSortChange = (event) => {
   dispatch(setSortBy(event.target.value));
 };
 
-if (status === 'loading') {
-  return (
-    <>
-    <NavBar />
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '10em' }}>
-      <div className='loader'></div>
-    </div>
-  </>
-  );
-}
+// if (status === 'loading') {
+//   return (
+//     <>
+//     <NavBar />
+//     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '10em' }}>
+//       <div className='loader'></div>
+//     </div>
+//   </>
+//   );
+// }
 
 if (status === 'failed') {
   return (
@@ -172,7 +172,7 @@ return (
                                   src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                                   alt={movie.title || 'Movie poster'}
                               />
-                              <CircleRating vote_average={movie.vote_average.toFixed(1)} />
+                              {/* <CircleRating vote_average={movie.vote_average.toFixed(1)} /> */}
                               <span
                                   style={{
                                       display: 'block',

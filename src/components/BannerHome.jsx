@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaAngleRight, FaAngleLeft } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
@@ -36,7 +36,7 @@ const BannerHome = () => {
 
     return (
         <section className='w-full h-full'>
-            <div className='flex min-h-full max-h-[91vh] overflow-hidden relative' >
+            <div className='flex min-h-full max-h-[91vh] overflow-hidden relative group'>
                 {
                     bannerData.length > 0 ? bannerData.map((data, index) => (
                         <div
@@ -52,7 +52,7 @@ const BannerHome = () => {
                             />
 
                             {/* Navigation buttons */}
-                            <div className='absolute top-0 w-full h-full hidden items-center justify-between px-4 group-hover:flex'>
+                            <div className='absolute top-0 w-full h-full flex items-center justify-between px-4'>
                                 <button
                                     onClick={handlePrevious}
                                     aria-label='Previous Slide'
@@ -63,7 +63,7 @@ const BannerHome = () => {
                                     onClick={handleNext}
                                     aria-label='Next Slide'
                                     className='bg-white p-2 rounded-full text-xl z-10 text-black'>
-                                    <FaAngleRight />
+                                    <FaAngleRight /> 
                                 </button>
                             </div>
 

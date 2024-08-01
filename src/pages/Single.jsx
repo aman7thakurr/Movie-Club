@@ -19,9 +19,11 @@ const Single = () => {
   const dispatch = useDispatch();
   const { similarData, recommendationData, genreList, contentGenres, status, error } = useSelector(state => state.singleContent);
   const [results, setResults] = useState([]);
+  const [castResults, setCastResults] = useState([]);
   const [key, setKey] = useState('');
   const [isModalOpen, setModalOpen] = useState(false);
 
+  console.log(content);
   useEffect(() => {
     const contentId = content?.id;
     const isMovie = !!movie;
@@ -66,6 +68,29 @@ const Single = () => {
     }
   }, [content, isMovie]);
 
+  
+  useEffect(() => {
+    if (content?.id) {
+      const fetchData = async () => {
+        const endpoint = isMovie
+          ? `https://api.themoviedb.org/3/movie/${content.id}/credits?api_key=ef6d335af07081934aa88a703974311c`
+          : `https://api.themoviedb.org/3/tv/${content.id}/credits?api_key=ef6d335af07081934aa88a703974311c`;
+
+        try {
+          const response = await fetch(endpoint);
+          const data = await response.json();
+          setCastResults(data?.cast);
+          // console.log(data.crew);
+          
+        } catch (err) {
+          console.error('Failed to fetch results:', err);
+        }
+      };
+
+      fetchData();
+    }
+  }, [content, isMovie]);  
+
   if (status === 'loading') {
     return (
       <>
@@ -108,8 +133,7 @@ const Single = () => {
             width: "100%",
             height: "100%",
             position: "absolute",
-            top: '0',
-            left: "0",
+           
             opacity: "0.3",
             filter: "blur(4px)",
             backgroundRepeat: 'no-repeat',
@@ -190,7 +214,7 @@ const Single = () => {
       </div>
 
       <div className="container" style={{ margin: "0 auto", padding: "0 15px" }}>
-        <Cast contentId={content?.id} isMovie={isMovie} />
+        <Cast castResults={castResults} contentId={content?.id} isMovie={isMovie} />
         <CarouselElement title={"Recommendation"} popularData={recommendationData} isTV={!isMovie} />
         <CarouselElement title={"Similar"} popularData={similarData} isTV={!isMovie} />
       </div>
