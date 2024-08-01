@@ -8,7 +8,7 @@ function App() {
   return (
   <>
     <Home/>
-    <a href="#" className="top">Back to Top &#8593;</a>
+    {/* <a href="#" className="top">Back to Top &#8593;</a> */}
 </>
   );
 }
