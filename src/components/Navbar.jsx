@@ -157,9 +157,9 @@ function NavBar() {
                 value={searchInput}
                 onChange={handleSearchChange}
               />
-              <button type='button' className='text-2xl text-white'>
+              {/* <button type='button' className='text-2xl text-white'>
                 <IoSearchOutline />
-              </button>
+              </button> */}
 
               {searchInput.length > 0 && (
                 <div className={styles["search-results"]}>
