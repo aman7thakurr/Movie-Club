@@ -5,6 +5,7 @@ import NavBar from '../components/Navbar';
 import Footer from '../components/Footer';
 import CarouselElement from '../components/CarouselElement';
 import SkeletonHome from '../skeleton/SkeletonHome';
+import BannerHome from '../components/BannerHome';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -20,15 +21,14 @@ const Home = () => {
 
     if (status === 'loading') {
         return (
-            <>
-                <NavBar />
-                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                    <SkeletonHome />
-                </div>
-                <Footer />
-            </>
+          <>
+          <NavBar />
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '10em' }}>
+            <div className='loader'></div>
+          </div>
+        </>
         );
-    }
+      }
 
     if (status === 'failed') {
         return (
@@ -46,6 +46,7 @@ const Home = () => {
         <>
             <NavBar />
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <BannerHome/>
                 <CarouselElement title={'Trending'} popularData={trending} />
                 <CarouselElement title={"What's Popular"} popularData={popular} />
                 <CarouselElement title={'Top Rated'} popularData={topRated} />

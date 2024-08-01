@@ -1,0 +1,30 @@
+html,body{
+    position: relative;
+    
+}
+.container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.searchForm{
+    margin-top: 2%;
+    margin-bottom: 5%;
+    display: flex;
+    width: 40%;
+}
+.searchInput{
+    width: 100%;
+    padding: 2%;
+    text-align: center;
+    border-radius: 10px;
+    margin-right: 1%;
+ color: black;
+ font-size: large;
+}
+.btn{
+   
+    font-size: xx-large;
+}

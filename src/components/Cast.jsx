@@ -1,9 +1,9 @@
 import React from 'react';
 import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css'; 
+import 'react-multi-carousel/lib/styles.css'; // Import styles
 import styles from '../Styles/cast.module.css';
 
-
+// Sample data for the cast (replace with actual data or props)
 const castData = [
   { id: 1, name: 'Actor 1', character: 'Character 1', imgSrc: 'https://via.placeholder.com/150' },
   { id: 2, name: 'Actor 2', character: 'Character 2', imgSrc: 'https://via.placeholder.com/150' },

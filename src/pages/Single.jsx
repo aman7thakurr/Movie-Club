@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchContentDetails, setContentGenres } from '../store/slice/singleContentSlice';
 import NavBar from '../components/Navbar';
 import Footer from '../components/Footer';
 import CircleRating from '../components/CircleRating';
@@ -7,95 +9,81 @@ import CarouselElement from '../components/CarouselElement';
 import Cast from '../components/Cast';
 import styles from "../Styles/single.module.css";
 import { FcStart } from "react-icons/fc";
-
-
-
-const API_KEY = 'ef6d335af07081934aa88a703974311c';
+import Modal from '../components/Modal';
 
 const Single = () => {
   const location = useLocation();
-  const { movie, tv } = location.state || {}; 
-
-  const [similarData, setSimilarData] = useState([]);
-  const [recommendationData, setRecommendationData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [genreList, setGenreList] = useState([]);
-  const [contentGenres, setContentGenres] = useState([]);
-
-  useEffect(() => {
-    const contentId = movie?.id || tv?.id;
-    const isMovie = !!movie;
-
-    if (!contentId) {
-      setError(new Error("No content data found."));
-      setLoading(false);
-      return;
-    }
-
-    const fetchData = async () => {
-      try {
-        const urls = [
-          isMovie
-            ? `https://api.themoviedb.org/3/movie/${contentId}/similar?api_key=${API_KEY}`
-            : `https://api.themoviedb.org/3/tv/${contentId}/similar?api_key=${API_KEY}`,
-          isMovie
-            ? `https://api.themoviedb.org/3/movie/${contentId}/recommendations?api_key=${API_KEY}`
-            : `https://api.themoviedb.org/3/tv/${contentId}/recommendations?api_key=${API_KEY}`,
-          `https://api.themoviedb.org/3/genre/${isMovie ? 'movie' : 'tv'}/list?api_key=${API_KEY}`
-        ];
-
-        const [similarResponse, recommendationResponse, genreResponse] = await Promise.all(
-          urls.map(url => fetch(url))
-        );
-
-        if (!similarResponse.ok || !recommendationResponse.ok || !genreResponse.ok) {
-          throw new Error("Network response was not ok");
-        }
-
-        const [similarData, recommendationData, genreData] = await Promise.all([
-          similarResponse.json(),
-          recommendationResponse.json(),
-          genreResponse.json()
-        ]);
-
-        setSimilarData(similarData.results || []);
-        setRecommendationData(recommendationData.results || []);
-        setGenreList(genreData.genres || []);
-
-        const genreMap = genreData.genres.reduce((acc, genre) => {
-          acc[genre.id] = genre.name;
-          return acc;
-        }, {});
-
-        const genres = isMovie
-          ? movie?.genre_ids?.map(id => genreMap[id]).filter(name => name)
-          : tv?.genre_ids?.map(id => genreMap[id]).filter(name => name);
-
-        setContentGenres(genres);
-
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [movie, tv]);
-
-  if (loading) {
-    return <><NavBar/>
-     <div style={{display:'flex',justifyContent:'center',alignItems: 'center', marginTop: '10em'}}>
-     <div className='loader'></div></div></>
-  }
-
-  if (error) {
-    return <div>Error fetching data: {error.message}</div>;
-  }
-
+  const { movie, tv } = location.state || {}; // Extract movie or TV show data
   const isMovie = !!movie;
   const content = isMovie ? movie : tv;
+  const dispatch = useDispatch();
+  const { similarData, recommendationData, genreList, contentGenres, status, error } = useSelector(state => state.singleContent);
+  const [results, setResults] = useState([]);
+  const [key, setKey] = useState('');
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    const contentId = content?.id;
+    const isMovie = !!movie;
+
+    if (contentId) {
+      dispatch(fetchContentDetails({ id: contentId, isMovie }));
+    }
+  }, [dispatch, content, movie, tv]);
+
+  useEffect(() => {
+    if (genreList.length > 0) {
+      const genreMap = genreList.reduce((acc, genre) => {
+        acc[genre.id] = genre.name;
+        return acc;
+      }, {});
+
+      const genres = (movie?.genre_ids || tv?.genre_ids || []).map(id => genreMap[id]).filter(name => name);
+      dispatch(setContentGenres(genres));
+    }
+  }, [genreList, movie, tv, dispatch]);
+
+  useEffect(() => {
+    if (content?.id) {
+      const fetchData = async () => {
+        const endpoint = isMovie
+          ? `https://api.themoviedb.org/3/movie/${content.id}/videos?api_key=ef6d335af07081934aa88a703974311c`
+          : `https://api.themoviedb.org/3/tv/${content.id}/videos?api_key=ef6d335af07081934aa88a703974311c`;
+
+        try {
+          const response = await fetch(endpoint);
+          const data = await response.json();
+          setResults(data.results);
+          if (data.results.length > 0) {
+            setKey(data.results[0].key);
+          }
+        } catch (err) {
+          console.error('Failed to fetch results:', err);
+        }
+      };
+
+      fetchData();
+    }
+  }, [content, isMovie]);
+
+  if (status === 'loading') {
+    return (
+      <>
+        <NavBar />
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '10em' }}>
+          <div className='loader'></div>
+        </div>
+      </>
+    );
+  }
+
+  if (status === 'failed') {
+    return <div>Error fetching data: {error}</div>;
+  }
+
+  const closeModal = () => setModalOpen(false);
+  const openModal = () => setModalOpen(true);
+
   const backdropPath = content?.backdrop_path;
   const posterPath = content?.poster_path;
   const title = isMovie ? content?.title : content?.name;
@@ -161,11 +149,21 @@ const Single = () => {
                 <CircleRating vote_average={voteAverage?.toFixed(1)} />
               </span>
               <span>
-                <FcStart style={{ fontSize: "82px" }} />
+                <FcStart onClick={openModal} style={{ fontSize: "82px" }} />
               </span>
-              <h2 style={{ fontWeight: "500", fontSize: "20px" }}>
+              <h2 onClick={openModal} style={{ fontWeight: "500", fontSize: "20px" }}>
                 Watch Trailer
               </h2>
+              <Modal isOpen={isModalOpen} onClose={closeModal}>
+                <h2>Watch This Video</h2>
+                <iframe
+             
+                  src={`https://www.youtube.com/embed/${key}`}
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </Modal>
             </div>
             <div className={styles.heading}>Overview</div>
             <div className={styles.description}>

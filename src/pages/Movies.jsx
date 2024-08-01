@@ -48,24 +48,12 @@ const handleSortChange = (event) => {
 
 if (status === 'loading') {
   return (
-      <>
-          <NavBar />
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <div
-                  className="container"
-                  style={{
-                      marginBottom: '15px',
-                      marginTop: '10px',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                  }}
-              >
-                  <SkeletonHome />
-              </div>
-          </div>
-          <Footer />
-      </>
+    <>
+    <NavBar />
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '10em' }}>
+      <div className='loader'></div>
+    </div>
+  </>
   );
 }
 

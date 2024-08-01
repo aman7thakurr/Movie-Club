@@ -15,19 +15,19 @@ const router = createBrowserRouter([
     ,
   
     {
-      path : '/Movies',
+      path : '/movie',
       element : <Movies/>
     },
     {
-      path : '/TvShows',
+      path : '/tv',
       element : <TvShows/>
     },
     {
-      path : '/SearchResult',
+      path : '/search',
       element : <SearchResult/>
     },
     {
-      path : '/Webseries',
+      path : '/webseries',
       element : <WebSeries/>
     },
     {
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
       element : <Single/>
     }
     ,{
-      path : '/Login',
+      path : '/login',
       element : <Login/>
     }
   ])

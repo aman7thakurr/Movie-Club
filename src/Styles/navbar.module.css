@@ -118,7 +118,7 @@
     display: none;
   }
 }
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 1024px) {
   .nav-menu {
     display: flex;
     flex-direction: column;
@@ -170,4 +170,28 @@
     cursor: pointer;
     color: #ffdd40;
   }
+}
+/* Assuming this is in navbar.module.css or a similar stylesheet */
+
+.search-results {
+  position: absolute;
+  top: 100%; /* Adjust based on your layout */
+  left: 0;
+  width: 100%;
+  background-color: white; /* Background color of the dropdown */
+  max-height: 300px; /* Adjust as needed */
+  overflow-y: auto; /* Enable scrolling if results exceed max-height */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Optional shadow */
+  z-index: 10; /* Ensure it appears above other elements */
+}
+
+.search-results-item {
+  padding: 10px; /* Padding for each item */
+  color: black; /* Text color */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-results-item:hover {
+  background-color: #f0f0f0; /* Hover background color */
 }

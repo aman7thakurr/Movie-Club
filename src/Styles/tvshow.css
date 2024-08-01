@@ -1,55 +1,63 @@
 /* Add this to your CSS file */
+html,body{
+  position: relative;
+}
 .pagination {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 20px 0;
-}
-
-.page-item {
-  margin: 0 5px;
-}
-
-.page-link {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  text-decoration: none;
-  color: #007bff;
-}
-
-.page-link:hover {
-  background-color: #f1f1f1;
-}
-
-.active .page-link {
-  background-color: #007bff;
-  color: white;
-}
-
-.disabled .page-link {
-  color: #ccc;
-}
-
-
-@media (max-width : 768px) {
-  
-  .movieheader{
-    flex-direction: column;
-    
-  }
-
-  .selectDiv{
     display: flex;
-    flex-direction: column;
-  width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
   }
-  .spanS{
-    right: 0;
-    left: 0;
+  
+  .page-item {
+    margin: 0 5px;
+  }
+  
+  .page-link {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  .page-link:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .active .page-link {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .disabled .page-link {
+    color: #ccc;
+  }
+  
+
+  @media (max-width : 768px) {
+    
+    .movieheader{
+      flex-direction: column;
+      
+    }
+
+    .selectDiv{
+      display: flex;
+      flex-direction: column;
     width: 100%;
+    }
+    .spanS{
+      right: 0;
+      left: 0;
+      width: 100%;
+    }
+    .selectS{
+      width: 70% !important;
+    }
+
+    .page-link {
+      padding: 6px 12px; /* Smaller padding on small screens */
+      font-size: 12px; /* Smaller font size on small screens */
+    }
   }
-  .selectS{
-    width: 70% !important;
-  }
-}
