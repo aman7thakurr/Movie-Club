@@ -72,7 +72,7 @@ function NavBar() {
   };
 
   const handleResultClick = (movie) => {
-    navigate('/search', { state: { movie } });
+    navigate('/single', { state: { movie } });
     setSearchInput('');
     setSearchResults([]);
     setDisplayedResults([]);
