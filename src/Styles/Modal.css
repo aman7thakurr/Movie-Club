@@ -74,7 +74,7 @@ iframe {
     }
     iframe {
         width: 100%; /* Ensure iframe scales with modal content */
-        height: 100%; /* Ensure iframe scales with modal content */
+        height: 300px; /* Ensure iframe scales with modal content */
     }
 }
 
@@ -89,10 +89,3 @@ iframe {
 }
 
 
-/* Add iframe specific styles if needed */
-@media screen and (max-width: 768px) {
-    iframe {
-        width: 100%; /* Ensure iframe scales with modal content */
-        height: 100%; /* Ensure iframe scales with modal content */
-    }
-}
