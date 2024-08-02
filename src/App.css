@@ -3,6 +3,22 @@ html,body{
   position: relative;
   
 }
+
+*{
+  box-sizing: border-box;
+}
+
+
+.container {
+  width: 100%!important;
+  max-width: 1170px!important;
+  margin: 0 auto!important;
+  padding: 0 15px!important; 
+}
+
+
+
+
 .top {
   --offset: 50px; 
   
@@ -101,4 +117,14 @@ html,body{
 @keyframes left {
   0% , 100%{ transform: translateY(10px) }
   50% { transform: translateY(-10px) }
+}
+
+
+.movieCard .card {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.movieCard .card a {
+  width: 25%;
 }

@@ -10,6 +10,17 @@ import Cast from '../components/Cast';
 import styles from "../Styles/single.module.css";
 import { FcStart } from "react-icons/fc";
 import Modal from '../components/Modal';
+import Carousel from 'react-multi-carousel';
+import { SlSocialYoutube } from "react-icons/sl";
+import PlayIcon from '../assets/PlayIcon';
+
+  const responsive = {
+    superLargeDesktop: { breakpoint: { max: 4000, min: 3000 }, items: 6 },
+    desktop: { breakpoint: { max: 3000, min: 1024 }, items: 3 },
+    tablet: { breakpoint: { max: 1024, min: 464 }, items: 2 },
+    mobile: { breakpoint: { max: 464, min: 0 }, items: 1 }
+  };
+  
 
 const Single = () => {
   const location = useLocation();
@@ -18,12 +29,13 @@ const Single = () => {
   const content = isMovie ? movie : tv;
   const dispatch = useDispatch();
   const { similarData, recommendationData, genreList, contentGenres, status, error } = useSelector(state => state.singleContent);
+
   const [results, setResults] = useState([]);
   const [castResults, setCastResults] = useState([]);
   const [key, setKey] = useState('');
   const [isModalOpen, setModalOpen] = useState(false);
 
-  console.log(content);
+  // console.log(content.status);
   useEffect(() => {
     const contentId = content?.id;
     const isMovie = !!movie;
@@ -133,7 +145,7 @@ const Single = () => {
             width: "100%",
             height: "100%",
             position: "absolute",
-           
+          
             opacity: "0.3",
             filter: "blur(4px)",
             backgroundRepeat: 'no-repeat',
@@ -141,10 +153,10 @@ const Single = () => {
           }}
         ></div>
 
-        <div className={styles.container}>
+        <div className="container">
+          <div className={styles.movieDetail}>
           <div className={styles.image}>
             <img
-              style={{ height: '100%', width: '100%' }}
               src={posterSrc}
               alt={title}
             />
@@ -168,20 +180,31 @@ const Single = () => {
                 <span>No genres available</span>
               )}
             </div>
+            
             <div className={styles.rating}>
-              <span>
+            <div style={{display:'flex'}}>
+              <span style={{marginTop:'10px'}}>
                 <CircleRating vote_average={voteAverage?.toFixed(1)} />
               </span>
-              <span>
-                <FcStart onClick={openModal} style={{ fontSize: "82px" }} />
-              </span>
-              <h2 onClick={openModal} style={{ fontWeight: "500", fontSize: "20px" }}>
-                Watch Trailer
-              </h2>
-              <Modal isOpen={isModalOpen} onClose={closeModal}>
-                <h2>Watch This Video</h2>
-                <iframe
+            
+              <button>
+              
+              
              
+      <div className={styles.playbtn} onClick={openModal} style={{ display: 'flex', alignItems: 'center', gap: '20px', cursor: 'pointer' }}>
+        <PlayIcon style={{ width: '70px', stroke: 'red' ,marginLeft:'40px'}} />
+      </div>
+ 
+              
+              
+              <div onClick={openModal} style={{marginLeft:'40px', fontWeight: "500", fontSize: "20px" }}>
+                Watch Trailer
+              </div>
+              </button></div>
+              <Modal isOpen={isModalOpen} onClose={closeModal}>
+                <button>Watch This Video</button>
+                <iframe
+            
                   src={`https://www.youtube.com/embed/${key}`}
                   title="YouTube video player"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -189,34 +212,55 @@ const Single = () => {
                 ></iframe>
               </Modal>
             </div>
-            <div className={styles.heading}>Overview</div>
+            <h3 className={styles.heading}>Overview</h3>
+
             <div className={styles.description}>
-              <span>{overview || "No description available"}</span>
-            </div>
-            <div className={styles.info}>
-              <span>Status: {content?.status || "N/A"}</span>
+              <p>{overview || "No description available"}</p>
+              <div className={styles.movieInfo}>
+                <p>
+                <span>Status: {content?.status || "N/A"}</span>
               <span>Release Date: {releaseDate || "N/A"}</span>
               <span>
                 Runtime: {runtime ? `${runtime} minutes` : "N/A"}
               </span>
-            </div>
-            <hr />
-            <div className={styles.info}>
+                </p>
+              <p>
               <span>Director: {content?.director || "N/A"}</span>
-            </div>
-            <hr />
-            <div className={styles.info}>
+              </p>
+              <p>
               <span>Writer: {content?.writer || "N/A"}</span>
+              </p>                
+              </div>
             </div>
-            <hr />
           </div>
+
+        </div>
         </div>
       </div>
 
       <div className="container" style={{ margin: "0 auto", padding: "0 15px" }}>
+       
         <Cast castResults={castResults} contentId={content?.id} isMovie={isMovie} />
-        <CarouselElement title={"Recommendation"} popularData={recommendationData} isTV={!isMovie} />
-        <CarouselElement title={"Similar"} popularData={similarData} isTV={!isMovie} />
+        
+          <h1 style={{ marginBottom: '10px', fontWeight: 'bolder', fontSize: '34px',textAlign:'center' }}>Official Videos</h1>
+          <Carousel responsive={responsive}>
+          { 
+          results.map((videoKey)=>{
+            return <> 
+            <div className="videoThumbnail" style={{marginRight:'10px'}} >
+                <img onClick={openModal} style={{ width: '100%',cursor:'pointer' }}
+                  src={`https://img.youtube.com/vi/${videoKey.key}/mqdefault.jpg`}
+                />
+                {/* <SlSocialYoutube /> */}
+              </div>
+              <div onClick={openModal} style={{cursor: 'pointer',marginLeft : '17%'}} className="videoTitle">{videoKey.name}</div>
+            
+            </>
+            })}
+            </Carousel> 
+        
+        <CarouselElement title={"Recommendation"} text={'/movie'} popularData={recommendationData} isTV={!isMovie} />
+        <CarouselElement title={"Similar"} text={'/movie'} popularData={similarData} isTV={!isMovie} />
       </div>
 
       <Footer />

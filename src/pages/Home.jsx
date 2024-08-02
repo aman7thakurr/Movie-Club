@@ -47,9 +47,9 @@ const Home = () => {
             <NavBar />
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <BannerHome/>
-                <CarouselElement title={'Trending'} popularData={trending} />
-                <CarouselElement title={"What's Popular"} popularData={popular} />
-                <CarouselElement title={'Top Rated'} popularData={topRated} />
+                <CarouselElement title={'Trending'} text={'/movie'} popularData={trending} />
+               <CarouselElement title={'Top Rated Tv show'} text={'/movie'} popularData={topRated} /> 
+                <CarouselElement title={"What's Popular"} text={'/movie'} popularData={popular} />
             </div>
             <Footer />
         </>

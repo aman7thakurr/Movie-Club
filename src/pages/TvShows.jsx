@@ -95,11 +95,19 @@ const TvShows = () => {
                     style={{ textDecoration: 'none', color: 'inherit' }}
                   >
                     <div className="swiper-slide" style={{ margin: '10px', textAlign: 'center' }}>
-                      <img
-                        style={{ height: '480px', width: 'auto', borderRadius: '8px' }}
-                        src={`https://image.tmdb.org/t/p/original${show.poster_path}`}
-                        alt={show.name || 'Show poster'}
-                      />
+                    <img
+  style={{
+    height: '480px',
+    width: 'auto',
+    borderRadius: '8px',
+  }}
+  src={`https://image.tmdb.org/t/p/original${show.poster_path}`}
+  alt={show.title || 'Movie poster'}
+  onError={(e) => {
+    e.target.src = 'https://via.placeholder.com/300x450?text=No+Image';
+  }}
+/>
+
                       {/* <CircleRating vote_average={show.vote_average.toFixed(1)} /> */}
                       <span style={{ display: 'block', marginTop: '10px', fontWeight: 'bold' }}>{show.name}</span>
                       <p>{show.first_air_date}</p>

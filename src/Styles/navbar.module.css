@@ -93,10 +93,10 @@
   transition: width 0.7s ease, background-color 0.5s ease;
 }
 
-.nav-item:hover:after {
+/* .nav-item:hover:after {
   width: 100%;
   background: #ffdd40;
-}
+} */
 
 .nav-item .active {
   color: #ffdd40;
@@ -131,21 +131,27 @@
     transition: all 0.5s ease;
     z-index: 1001;
   }
+  .nav-login{
+    display: none;
+  }
 .custom{
+display: flex;
+justify-content: center;
+align-items: center;
 
-  visibility: hidden;
+  /* visibility: hidden;
   display: none;
-  opacity: 0;
+  opacity: 0; */
 }
   .nav-menu.active {
     background: var(--black3);
     left: 0px;
     opacity: 1;
-    transition: all 0.5s ease;
+    /* transition: all 0.5s ease;  */
     z-index: 1;
   }
   .nav-item .active {
-    color: #ffdd40;
+    /* color: #ffdd40; */
     border: none;
   }
   .nav-links {
@@ -162,16 +168,16 @@
   .nav-icon {
     display: block;
     position: absolute;
-    top: 50%;
+    /* top: 50%; */
     right: 0;
-    transform: translate(-100%, -50%);
+    /* transform: translate(-100%, -50%); */
     width: 2rem;
     height: 2rem;
     cursor: pointer;
     color: #ffdd40;
   }
 }
-/* Assuming this is in navbar.module.css or a similar stylesheet */
+
 
 .search-results {
   position: absolute;
