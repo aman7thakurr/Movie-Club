@@ -4,7 +4,7 @@ import NavBar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CircleRating from "../components/CircleRating";
 import SkeletonHome from "../skeleton/SkeletonHome";
-import { Helmet } from 'react-helmet';
+// import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchMoviesData,
@@ -16,7 +16,7 @@ import {
 
 const Movies = () => {
  
-  const currentUrl = window.location.href;
+  // const currentUrl = window.location.href;
 
 
   const dispatch = useDispatch();
@@ -73,11 +73,11 @@ const Movies = () => {
   if (status === "failed") {
     return (
       <>
-          <Helmet>
+          {/* <Helmet>
         <meta property="og:url" content={currentUrl} />
         <meta property="og:title" content="Movies" />
         <title>Movies</title>
-      </Helmet>
+      </Helmet> */}
 
 
 
