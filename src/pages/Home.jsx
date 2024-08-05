@@ -18,8 +18,6 @@ const Home = () => {
     
         document.querySelector('meta[property="og:url"]').setAttribute('content', url);
         document.querySelector('meta[property="og:title"]').setAttribute('content', title);
-        document.querySelector('meta[property="og:image"]').setAttribute('content', image);
-        document.querySelector('meta[property="og:description"]').setAttribute('content', description);
        
 
     
@@ -27,8 +25,6 @@ const Home = () => {
        
           document.querySelector('meta[property="og:url"]').removeAttribute('content');
           document.querySelector('meta[property="og:title"]').removeAttribute('content');
-          document.querySelector('meta[property="og:image"]').removeAttribute('content');
-          document.querySelector('meta[property="og:description"]').removeAttribute('content');
           
 
         };
