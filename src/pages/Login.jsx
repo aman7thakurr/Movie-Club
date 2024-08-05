@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 
 const Login = () => {
   useEffect(() => {
-    const title = "Login - Movie Club";
+    const title = "Login/Signup - Movie Club";
     const description = "Explore the latest movies available for streaming.";
     const url = window.location.href;
     const image = "https://img.freepik.com/free-photo/view-3d-cinema-theatre-room_23-2151067055.jpg?ga=GA1.1.1071293010.1722833002&semt=sph"; 
@@ -16,6 +16,11 @@ const Login = () => {
     document.querySelector('meta[property="og:title"]').setAttribute('content', title);
     document.querySelector('meta[property="og:image"]').setAttribute('content', image);
     document.querySelector('meta[property="og:description"]').setAttribute('content', description);
+   
+    document.querySelector('meta[property="twitter:url"]').setAttribute('content', url);
+    document.querySelector('meta[property="twitter:title"]').setAttribute('content', title);
+    document.querySelector('meta[property="twitter:image"]').setAttribute('content', image);
+    document.querySelector('meta[property="twitter:description"]').setAttribute('content', description);
 
     return () => {
    
@@ -23,6 +28,11 @@ const Login = () => {
       document.querySelector('meta[property="og:title"]').removeAttribute('content');
       document.querySelector('meta[property="og:image"]').removeAttribute('content');
       document.querySelector('meta[property="og:description"]').removeAttribute('content');
+      
+      document.querySelector('meta[property="twitter:url"]').removeAttribute('content');
+      document.querySelector('meta[property="twitter:title"]').removeAttribute('content');
+      document.querySelector('meta[property="twitter:image"]').removeAttribute('content');
+      document.querySelector('meta[property="twitter:description"]').removeAttribute('content');
     };
   }, []);
 
