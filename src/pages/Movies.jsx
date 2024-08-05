@@ -23,6 +23,7 @@ const Movies = () => {
     
     var title = document.createElement('meta');
     title.setAttribute('property', 'og:title');
+    document.title ='Movies'
     title.content = "Movies";
     document.getElementsByTagName('head')[0].appendChild(title);
     
