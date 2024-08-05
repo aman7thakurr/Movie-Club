@@ -1,18 +1,15 @@
-import { useEffect } from 'react';
+// src/pages/Home.js
+
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPopularData, fetchTrendingData, fetchTopRatedData } from '../store/slice/homeSlice';
 import NavBar from '../components/Navbar';
 import Footer from '../components/Footer';
 import CarouselElement from '../components/CarouselElement';
-import SkeletonHome from '../skeleton/SkeletonHome';
 import BannerHome from '../components/BannerHome';
-// import { Helmet } from 'react-helmet';
-const Home = () => {
-   
-    
-    
+import Toast from '../components/Toast';
 
-
+const Home = () => {    
     const dispatch = useDispatch();
     const { popular, trending, topRated, status, error } = useSelector((state) => state.home);
 
@@ -27,13 +24,14 @@ const Home = () => {
     if (status === 'loading') {
         return (
           <>
-          <NavBar />
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '10em' }}>
-            <div className='loader'></div>
-          </div>
-        </>
+            <Toast />
+            <NavBar />
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '10em' }}>
+              <div className='loader'></div>
+            </div>
+          </>
         );
-      }
+    }
 
     if (status === 'failed') {
         return (
@@ -49,12 +47,12 @@ const Home = () => {
 
     return (
         <>
-     
+            <Toast />
             <NavBar />
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                <BannerHome/>
+                <BannerHome />
                 <CarouselElement title={'Trending'} text={'/movie'} popularData={trending} />
-               <CarouselElement title={'Top Rated Tv show'} text={'/movie'} popularData={topRated} /> 
+                <CarouselElement title={'Top Rated Tv show'} text={'/movie'} popularData={topRated} /> 
                 <CarouselElement title={"What's Popular"} text={'/movie'} popularData={popular} />
             </div>
             <Footer />
