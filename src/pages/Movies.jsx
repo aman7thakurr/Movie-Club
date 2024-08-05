@@ -24,7 +24,7 @@ const Movies = () => {
     var title = document.createElement('meta');
     title.setAttribute('property', 'og:title');
     title.content = "Movies";
-    document.getElementsByTagName('head')[1].appendChild(title);
+    document.getElementsByTagName('head')[0].appendChild(title);
     
     // const title ="Movies - Movie Club";
     // const description = "Explore the latest movies available for streaming.";
