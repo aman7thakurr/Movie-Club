@@ -23,10 +23,7 @@ const TvShows = () => {
     document.querySelector('meta[property="og:image"]').setAttribute('content', image);
     document.querySelector('meta[property="og:description"]').setAttribute('content', description);
    
-    document.querySelector('meta[property="twitter:url"]').setAttribute('content', url);
-    document.querySelector('meta[property="twitter:title"]').setAttribute('content', title);
-    document.querySelector('meta[property="twitter:image"]').setAttribute('content', image);
-    document.querySelector('meta[property="twitter:description"]').setAttribute('content', description);
+
 
     return () => {
    
@@ -35,10 +32,7 @@ const TvShows = () => {
       document.querySelector('meta[property="og:image"]').removeAttribute('content');
       document.querySelector('meta[property="og:description"]').removeAttribute('content');
       
-      document.querySelector('meta[property="twitter:url"]').removeAttribute('content');
-      document.querySelector('meta[property="twitter:title"]').removeAttribute('content');
-      document.querySelector('meta[property="twitter:image"]').removeAttribute('content');
-      document.querySelector('meta[property="twitter:description"]').removeAttribute('content');
+
     };
   }, []);
 
