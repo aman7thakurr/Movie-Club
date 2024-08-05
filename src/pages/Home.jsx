@@ -8,13 +8,13 @@ import SkeletonHome from '../skeleton/SkeletonHome';
 import BannerHome from '../components/BannerHome';
 import { Helmet } from 'react-helmet';
 const Home = () => {
-
+    const currentUrl = window.location.href;
       useEffect(() => {
       
-        var link = document.createElement('meta');
-        link.setAttribute('property', 'og:url');
-        link.content = document.location;
-        document.getElementsByTagName('head')[0].appendChild(link);
+        // var link = document.createElement('meta');
+        // link.setAttribute('property', 'og:url');
+        // link.content = document.location;
+        // document.getElementsByTagName('head')[0].appendChild(link);
       
         // const title = "Home - Movie Club";
         // const description = "Explore the latest movies available for streaming.";
