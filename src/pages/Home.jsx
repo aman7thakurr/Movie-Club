@@ -96,10 +96,10 @@ const Home = () => {
     return (
         <>
             <Helmet>
-        <meta property="og:url" content={currentUrl} />
-        <meta property="og:title" content="Home" />
-        <meta property="og:image" content="https://img.freepik.com/free-photo/view-3d-cinema-theatre-room_23-2151067055.jpg?ga=GA1.1.1071293010.1722833002&semt=sph" />
-        <meta property="og:description" content="Stream Movies, Web Series, and TV Series and enjoy the content" />
+        <meta name="og:url" content={currentUrl} />
+        <meta name="og:title" content="Home" />
+        <meta name="og:image" content="https://img.freepik.com/free-photo/view-3d-cinema-theatre-room_23-2151067055.jpg?ga=GA1.1.1071293010.1722833002&semt=sph" />
+        <meta name="og:description" content="Stream Movies, Web Series, and TV Series and enjoy the content" />
         <title>Movies</title>
       </Helmet>
             <NavBar />
