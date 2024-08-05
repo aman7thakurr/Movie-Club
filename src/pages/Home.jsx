@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 import CarouselElement from '../components/CarouselElement';
 import SkeletonHome from '../skeleton/SkeletonHome';
 import BannerHome from '../components/BannerHome';
-
+import { Helmet } from 'react-helmet';
 const Home = () => {
 
       useEffect(() => {
@@ -95,6 +95,13 @@ const Home = () => {
 
     return (
         <>
+            <Helmet>
+        <meta property="og:url" content={currentUrl} />
+        <meta property="og:title" content="Movies" />
+        <meta property="og:image" content="https://img.freepik.com/free-photo/view-3d-cinema-theatre-room_23-2151067055.jpg?ga=GA1.1.1071293010.1722833002&semt=sph" />
+        <meta property="og:description" content="Stream Movies, Web Series, and TV Series and enjoy the content" />
+        <title>Movies</title>
+      </Helmet>
             <NavBar />
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <BannerHome/>
