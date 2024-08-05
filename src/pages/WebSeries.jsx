@@ -16,7 +16,7 @@ const WebSeries = () => {
     const image = "https://img.freepik.com/free-photo/view-3d-cinema-theatre-room_23-2151067055.jpg?ga=GA1.1.1071293010.1722833002&semt=sph";
 
   
-    document.title = title;
+    // document.title = title;
 
 
     const setMetaTag = (property, content) => {
