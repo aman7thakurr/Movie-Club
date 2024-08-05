@@ -18,7 +18,7 @@ const Movies = () => {
   useEffect(() => {
     var link = document.createElement('meta');
     link.setAttribute('property', 'og:url');
-    link.content = document.location;
+    link.content = document.location.href;
     document.getElementsByTagName('head')[0].appendChild(link);
     
     var title = document.createElement('meta');
