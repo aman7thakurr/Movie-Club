@@ -23,7 +23,7 @@ const Movies = () => {
     
     var title = document.createElement('meta');
     link.setAttribute('property', 'og:title');
-    link.content = document.location.pathname;
+    link.content = "Movies";
     document.getElementsByTagName('head')[0].appendChild(link);
     
     // const title ="Movies - Movie Club";
