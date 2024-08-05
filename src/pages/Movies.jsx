@@ -22,9 +22,9 @@ const Movies = () => {
     document.getElementsByTagName('head')[0].appendChild(link);
     
     var title = document.createElement('meta');
-    link.setAttribute('property', 'og:title');
-    link.content = "Movies";
-    document.getElementsByTagName('head')[0].appendChild(link);
+    title.setAttribute('property', 'og:title');
+    title.content = "Movies";
+    document.getElementsByTagName('head')[0].appendChild(title);
     
     // const title ="Movies - Movie Club";
     // const description = "Explore the latest movies available for streaming.";
