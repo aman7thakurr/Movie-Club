@@ -80,7 +80,7 @@ const Movies = () => {
       </Helmet>
 
 
-      
+
         <NavBar />
         <div style={{ display: "flex", justifyContent: "center" }}>
           <div
@@ -103,6 +103,11 @@ const Movies = () => {
 
   return (
     <>
+    <Helmet>
+        <meta property="og:url" content={currentUrl} />
+        <meta property="og:title" content="Movies" />
+        <title>Movies</title>
+      </Helmet>
       <NavBar />
       <div style={{ display: "flex", justifyContent: "center" }}>
         <div
