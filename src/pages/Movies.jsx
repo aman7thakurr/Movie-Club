@@ -4,7 +4,7 @@ import NavBar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CircleRating from "../components/CircleRating";
 import SkeletonHome from "../skeleton/SkeletonHome";
-
+import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchMoviesData,
@@ -15,57 +15,8 @@ import {
 } from "../store/slice/moviesSlice";
 
 const Movies = () => {
-  useEffect(() => {
-    var link = document.createElement('meta');
-    link.setAttribute('property', 'og:url');
-    link.content = document.location.href;
-    document.getElementsByTagName('head')[0].appendChild(link);
-    
-    var title = document.createElement('meta');
-    title.setAttribute('property', 'og:title');
-    document.title ='Movies'
-    title.content = "Movies";
-    document.getElementsByTagName('head')[0].appendChild(title);
-    
-    // const title ="Movies - Movie Club";
-    // const description = "Explore the latest movies available for streaming.";
-    // const url = window.location.href;
-    // const image = "https://img.freepik.com/free-photo/view-3d-cinema-theatre-room_23-2151067055.jpg?ga=GA1.1.1071293010.1722833002&semt=sph";
-
-  
-    // document.title = title;
-
-
-    // const setMetaTag = (property, content) => {
-    //   let tag = document.querySelector(`meta[property="${property}"]`);
-    //   if (!tag) {
-    //     tag = document.createElement('meta');
-    //     tag.setAttribute('property', property);
-    //     document.head.appendChild(tag);
-    //   }
-    //   tag.setAttribute('content', content);
-    // };
-
-
-    // setMetaTag('og:url', url);
-    // setMetaTag('og:title', title);
-
-
-    // return () => {
-     
-    //   const removeMetaTag = (property) => {
-    //     const tag = document.querySelector(`meta[property="${property}"]`);
-    //     if (tag) {
-    //       tag.remove();
-    //     }
-    //   };
-
-    //   removeMetaTag('og:url');
-    //   removeMetaTag('og:title');
-
-    // };
-  }, []);
-
+ 
+  const currentUrl = window.location.href;
 
 
   const dispatch = useDispatch();
@@ -122,6 +73,11 @@ const Movies = () => {
   if (status === "failed") {
     return (
       <>
+          <Helmet>
+        <meta property="og:url" content={currentUrl} />
+        <meta property="og:title" content="Movies" />
+        <title>Movies</title>
+      </Helmet>
         <NavBar />
         <div style={{ display: "flex", justifyContent: "center" }}>
           <div
