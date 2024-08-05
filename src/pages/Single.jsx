@@ -46,8 +46,7 @@ const Single = () => {
 
     setMetaTag('og:url', url);
     setMetaTag('og:title', title);
-    setMetaTag('og:image', image);
-    setMetaTag('og:description', description);
+
 
     return () => {
      
@@ -60,8 +59,7 @@ const Single = () => {
 
       removeMetaTag('og:url');
       removeMetaTag('og:title');
-      removeMetaTag('og:image');
-      removeMetaTag('og:description');
+
     };
   }, []);
 

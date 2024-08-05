@@ -32,8 +32,7 @@ const Home = () => {
 
         setMetaTag('og:url', url);
         setMetaTag('og:title', title);
-        setMetaTag('og:image', image);
-        setMetaTag('og:description', description);
+   
     
         return () => {
          
@@ -46,8 +45,7 @@ const Home = () => {
     
           removeMetaTag('og:url');
           removeMetaTag('og:title');
-          removeMetaTag('og:image');
-          removeMetaTag('og:description');
+
         };
       }, []);
 
