@@ -21,6 +21,11 @@ const Movies = () => {
     link.content = document.location;
     document.getElementsByTagName('head')[0].appendChild(link);
     
+    var title = document.createElement('meta');
+    link.setAttribute('property', 'og:title');
+    link.content = document.location.pathname;
+    document.getElementsByTagName('head')[0].appendChild(link);
+    
     // const title ="Movies - Movie Club";
     // const description = "Explore the latest movies available for streaming.";
     // const url = window.location.href;
