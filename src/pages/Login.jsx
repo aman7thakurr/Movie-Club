@@ -5,27 +5,44 @@ import Footer from '../components/Footer';
 
 const Login = () => {
   useEffect(() => {
-    const title = "Login/Signup - Movie Club";
+    const title = "Details - Movie Club";
     const description = "Explore the latest movies available for streaming.";
     const url = window.location.href;
-    const image = "https://img.freepik.com/free-photo/view-3d-cinema-theatre-room_23-2151067055.jpg?ga=GA1.1.1071293010.1722833002&semt=sph"; 
+    const image = "https://img.freepik.com/free-photo/view-3d-cinema-theatre-room_23-2151067055.jpg?ga=GA1.1.1071293010.1722833002&semt=sph";
 
+  
     document.title = title;
 
-    document.querySelector('meta[property="og:url"]').setAttribute('content', url);
-    document.querySelector('meta[property="og:title"]').setAttribute('content', title);
-    document.querySelector('meta[property="og:image"]').setAttribute('content', image);
-    document.querySelector('meta[property="og:description"]').setAttribute('content', description);
-   
-  
+
+    const setMetaTag = (property, content) => {
+      let tag = document.querySelector(`meta[property="${property}"]`);
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('property', property);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute('content', content);
+    };
+
+
+    setMetaTag('og:url', url);
+    setMetaTag('og:title', title);
+    setMetaTag('og:image', image);
+    setMetaTag('og:description', description);
 
     return () => {
-   
-      document.querySelector('meta[property="og:url"]').removeAttribute('content');
-      document.querySelector('meta[property="og:title"]').removeAttribute('content');
-      document.querySelector('meta[property="og:image"]').removeAttribute('content');
-      document.querySelector('meta[property="og:description"]').removeAttribute('content');
+     
+      const removeMetaTag = (property) => {
+        const tag = document.querySelector(`meta[property="${property}"]`);
+        if (tag) {
+          tag.remove();
+        }
+      };
 
+      removeMetaTag('og:url');
+      removeMetaTag('og:title');
+      removeMetaTag('og:image');
+      removeMetaTag('og:description');
     };
   }, []);
 
