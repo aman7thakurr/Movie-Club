@@ -10,7 +10,7 @@ import BannerHome from '../components/BannerHome';
 const Home = () => {
 
       useEffect(() => {
-        const title = "Details - Movie Club";
+        const title = "Home - Movie Club";
         const description = "Explore the latest movies available for streaming.";
         const url = window.location.href;
         const image = "https://img.freepik.com/free-photo/view-3d-cinema-theatre-room_23-2151067055.jpg?ga=GA1.1.1071293010.1722833002&semt=sph";
