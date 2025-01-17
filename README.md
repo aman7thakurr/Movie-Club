@@ -1,4 +1,4 @@
-# <img src="https://movie-club-gamma.vercel.app/favicon.ico" alt="Movie Streaming" width="50" /> <strong>Movie Streaming Website</strong>
+ <strong>Movie Streaming Website</strong>
 
 <p>Welcome to the <strong>Movie Streaming Website</strong>, a modern, responsive platform for browsing and streaming movies. The website offers a user-friendly interface and powerful features to help users discover and enjoy movies with ease.</p>
 
