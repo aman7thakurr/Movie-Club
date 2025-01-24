@@ -101,7 +101,7 @@ cd movie-streaming</code></pre>
 
 <h2>Contact</h2>
 
-<p>For any queries or issues, feel free to <a href="https://github.com/your-username/movie-streaming/issues" target="_blank">open an issue</a> or contact me directly at <strong>your-email@example.com</strong>.</p>
+<p>For any queries or issues, feel free to <a href="https://github.com/aman7thakurr/movie-streaming/issues" target="_blank">open an issue</a> or contact me directly at <strong>your-email@example.com</strong>.</p>
 
 <h2>🔖 Highlights</h2>
 
